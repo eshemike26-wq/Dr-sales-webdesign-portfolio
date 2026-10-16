@@ -257,7 +257,7 @@ form.addEventListener('submit', async (e) => {
     if (!res.ok) throw new Error(String(res.status));
     form.reset();
     statusEl.classList.add('is-success');
-    statusEl.textContent = 'Message sent. I will reply within two working days.';
+    statusEl.textContent = 'Message sent. I will reply within one working day.';
   } catch {
     statusEl.classList.add('is-error');
     statusEl.textContent = 'Your message could not be sent. Check your connection and try again, or email me directly.';
