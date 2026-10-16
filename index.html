@@ -607,8 +607,12 @@
           </ul>
         </div>
 
-        <!-- Replace YOUR_FORM_ID with the ID from your Formspree form (formspree.io) -->
-        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <!-- Messages are delivered to your email by Formspree (formspree.io) -->
+        <form class="contact-form" action="https://formspree.io/f/xjygjzlp" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New message from your portfolio website">
+          <!-- Spam trap: real visitors never see or fill this -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+
           <div class="field">
             <label for="cf-name">Your name</label>
             <input id="cf-name" name="name" type="text" autocomplete="name" required>
@@ -655,6 +659,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=8" defer></script>
+  <script src="assets/js/main.js?v=9" defer></script>
 </body>
 </html>

@@ -245,12 +245,6 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  if (form.action.includes('YOUR_FORM_ID')) {
-    statusEl.classList.add('is-error');
-    statusEl.textContent = 'The contact form is not connected yet. Please email me directly for now.';
-    return;
-  }
-
   submitBtn.disabled = true;
   submitBtn.textContent = 'Sending…';
 
