@@ -356,7 +356,7 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr minmax(320px, 44vw) 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr auto;
   column-gap: clamp(1.5rem, 3vw, 3rem);
   min-height: 100svh;
@@ -383,8 +383,14 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   flex-direction: column;
   gap: 1.75rem;
   padding-top: clamp(1rem, 8vh, 6rem);
+  /* Text sits over the empty corners of the cut-out photo */
+  position: relative;
+  z-index: 3;
+  grid-row: 1;
+  align-self: start;
 }
-.hero-right { align-items: flex-start; max-width: 25rem; justify-self: end; }
+.hero-left { grid-column: 1; }
+.hero-right { grid-column: 2; align-items: flex-start; max-width: 25rem; justify-self: end; }
 
 .badge {
   display: inline-flex;
@@ -419,9 +425,12 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .hero-intro { color: var(--muted); font-size: 1.0625rem; }
 
 .hero-photo {
-  grid-column: 2;
+  grid-column: 1 / -1;
   grid-row: 1;
   align-self: end;
+  justify-self: center;
+  /* The photo is the hero: as large as fits in one screen */
+  width: min(58vw, 880px, calc((100svh - 8rem) * 1.046));
   margin-top: clamp(0rem, 4vh, 2rem);
   position: relative;
   z-index: 1;
@@ -446,8 +455,8 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   grid-column: 1 / -1;
   grid-row: 2;
   z-index: 0;
-  margin: -0.8em -0.02em 0;
-  font: 800 19.6vw/0.8 var(--font-display);
+  margin: -0.86em -0.02em 0;
+  font: 800 13vw/0.8 var(--font-display);
   letter-spacing: -0.015em;
   text-transform: uppercase;
   text-align: center;
@@ -466,7 +475,7 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .hero-name-outline { display: none; }
 }
 @media (min-width: 1500px) {
-  .hero-name { font-size: min(19.6vw, 21rem); }
+  .hero-name { font-size: min(13vw, 14rem); }
 }
 
 /* Character split (JS) */
@@ -486,20 +495,19 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .hero-photo {
     grid-column: 1;
     grid-row: auto;
-    width: min(92%, 440px);
+    width: min(100%, 520px);
     margin: 0.5rem auto 0;
     align-self: start;
   }
-  .hero-left { grid-row: 1; }
+  .hero-left { grid-row: 1; grid-column: 1; }
   .hero-photo { grid-row: 2; }
   .hero-name {
     grid-column: 1;
     grid-row: 3;
-    margin-top: -1.02em;
-    font-size: 20.4vw;
-    order: 0;
+    margin-top: -1.55em;
+    font-size: 15.5vw;
   }
-  .hero-right { grid-row: 4; padding-bottom: 1rem; }
+  .hero-right { grid-row: 4; grid-column: 1; padding-bottom: 1rem; }
 }
 
 /* Hero entrance (after the loader) */
