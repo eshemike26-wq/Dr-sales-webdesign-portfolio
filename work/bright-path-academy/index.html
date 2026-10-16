@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bright Path Academy — Learn the digital skills employers pay for</title>
+  <meta name="description" content="Live, mentor-led courses in UI design, digital marketing and data analysis. Join the free masterclass.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #2b1f5c;
+      --purple-2: #3a2a7a;
+      --violet: #6c4cf1;
+      --sun: #ffd34d;
+      --ink: #1c1638;
+      --muted: #625d78;
+      --bg: #f6f4fb;
+      --line: #e7e3f3;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: var(--ink); font: 400 16px/1.6 'Plus Jakarta Sans', system-ui, sans-serif; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    .wrap { max-width: 1260px; margin: 0 auto; padding: 0 40px; }
+
+    .topbar { background: var(--sun); color: var(--purple); text-align: center; padding: 10px; font-size: 14px; font-weight: 600; }
+
+    .hero { background: radial-gradient(900px 500px at 85% 20%, #4a37a8, transparent 70%), var(--purple); color: #fff; padding-bottom: 110px; overflow: hidden; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 86px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+    .logo svg { width: 36px; height: 36px; }
+    .nav ul { display: flex; gap: 32px; font-size: 15px; font-weight: 500; color: rgba(255, 255, 255, .8); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 12px; background: var(--sun); color: var(--purple); font-weight: 700; font-size: 15px; }
+    .btn-ghost { background: rgba(255, 255, 255, .1); color: #fff; }
+
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; padding-top: 60px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 99px; background: rgba(255, 211, 77, .14); color: var(--sun); font-size: 13px; font-weight: 600; }
+    .chip i { width: 8px; height: 8px; border-radius: 50%; background: #ff6b6b; }
+    .hero h1 { margin-top: 22px; font-size: clamp(46px, 5.4vw, 74px); line-height: 1.04; font-weight: 800; letter-spacing: -.045em; }
+    .hero h1 span { color: var(--sun); }
+    .hero p.lead { margin-top: 22px; font-size: 18px; color: rgba(255, 255, 255, .75); max-width: 500px; }
+    .actions { display: flex; gap: 14px; margin-top: 34px; }
+    .timer { display: flex; gap: 10px; margin-top: 40px; align-items: center; }
+    .timer div { min-width: 70px; padding: 12px 10px; border-radius: 12px; background: rgba(255, 255, 255, .08); text-align: center; }
+    .timer b { display: block; font-size: 28px; line-height: 1; font-weight: 800; }
+    .timer small { font-size: 12px; color: rgba(255, 255, 255, .6); }
+    .timer p { margin-left: 8px; font-size: 14px; color: rgba(255, 255, 255, .7); max-width: 130px; line-height: 1.4; }
+
+    .hero-media { position: relative; }
+    .hero-media img { width: 100%; aspect-ratio: 1/1.05; object-fit: cover; border-radius: 28px; }
+    .card { position: absolute; display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 24px 50px rgba(10, 5, 40, .3); font-size: 14px; }
+    .card b { display: block; font-size: 18px; font-weight: 800; }
+    .card .ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--sun); font-weight: 800; }
+    .c1 { left: -40px; top: 60px; }
+    .c2 { right: -24px; bottom: 70px; }
+    .c2 .ic { background: #e9e3ff; color: var(--violet); }
+    .avs { display: flex; }
+    .avs i { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; margin-left: -8px; background: center/cover; }
+    .avs i:first-child { margin-left: 0; }
+
+    .logos { padding: 44px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: #9b96b0; font-weight: 700; font-size: 20px; letter-spacing: -.02em; }
+    .logos span:first-child { font-size: 14px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+
+    section { padding: 100px 0; }
+    .center { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .kicker { color: var(--violet); font-weight: 700; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; }
+    .center h2, .split h2 { margin-top: 12px; font-size: 46px; line-height: 1.08; font-weight: 800; letter-spacing: -.04em; }
+    .center p { margin-top: 14px; color: var(--muted); font-size: 17px; }
+
+    .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+    .track { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+    .track:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(43, 31, 92, .12); }
+    .track img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+    .track .body { padding: 24px; }
+    .track .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); font-weight: 500; }
+    .level { padding: 4px 10px; border-radius: 99px; background: #efeaff; color: var(--violet); font-weight: 700; }
+    .track h3 { margin-top: 16px; font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+    .track p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+    .track .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .track .foot b { font-size: 22px; font-weight: 800; }
+    .track .foot a { font-weight: 700; color: var(--violet); }
+
+    .how { background: var(--bg); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .step { background: #fff; border-radius: 20px; padding: 30px 26px; }
+    .step span { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; background: var(--purple); color: var(--sun); font-weight: 800; }
+    .step h3 { margin-top: 22px; font-size: 19px; font-weight: 800; }
+    .step p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; align-items: center; }
+    .split img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 28px; }
+    .split p.bio { margin-top: 18px; color: var(--muted); font-size: 17px; }
+    .creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .creds div { padding: 20px; border-radius: 16px; background: var(--bg); }
+    .creds b { display: block; font-size: 28px; font-weight: 800; color: var(--violet); }
+    .creds span { font-size: 14px; color: var(--muted); }
+
+    .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .quote { padding: 30px; border-radius: 22px; border: 1px solid var(--line); }
+    .quote .st { color: #f5b400; letter-spacing: 2px; }
+    .quote p { margin-top: 14px; font-size: 16px; }
+    .quote .who { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 14px; color: var(--muted); }
+    .quote .who i { width: 44px; height: 44px; border-radius: 50%; background: center/cover; }
+    .quote .who b { display: block; color: var(--ink); }
+
+    .final { background: var(--purple); color: #fff; border-radius: 32px; padding: 80px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+    .final h2 { font-size: 48px; line-height: 1.06; font-weight: 800; letter-spacing: -.04em; }
+    .final h2 span { color: var(--sun); }
+    .final p { margin-top: 14px; color: rgba(255, 255, 255, .7); }
+    .final form { display: grid; gap: 12px; }
+    .final input { padding: 17px 18px; border-radius: 12px; border: 0; font: 15px 'Plus Jakarta Sans', sans-serif; }
+    .final .btn { justify-content: center; border: 0; cursor: pointer; font-family: inherit; }
+
+    footer { padding: 70px 0 36px; color: var(--muted); }
+    .legal { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; margin-top: 40px; border-top: 1px solid var(--line); font-size: 13px; }
+    .foot-top { display: flex; justify-content: space-between; align-items: center; }
+    .foot-top .logo { color: var(--ink); }
+    .foot-top ul { display: flex; gap: 28px; font-size: 15px; }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 0 20px; }
+      .nav ul { display: none; }
+      .hero-grid, .tracks, .split, .quotes, .final { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .c1 { left: 10px; } .c2 { right: 10px; }
+      .logos { flex-wrap: wrap; gap: 16px; }
+      .final { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Free live masterclass this Thursday at 7pm · Only 48 seats left</div>
+
+  <header class="hero">
+    <div class="wrap nav">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#ffd34d"/><path d="M9 29c6 0 8-4 11-9s5-9 11-9" fill="none" stroke="#2b1f5c" stroke-width="3.2" stroke-linecap="round"/><circle cx="31" cy="11" r="3.2" fill="#2b1f5c"/></svg>
+        Bright Path
+      </a>
+      <ul>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Masterclass</a></li>
+        <li><a href="#">Mentors</a></li>
+        <li><a href="#">Success stories</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+      <a class="btn btn-ghost" href="#">Student login</a>
+    </div>
+
+    <div class="wrap hero-grid">
+      <div>
+        <span class="chip"><i></i>Free masterclass · Thursday, 7pm</span>
+        <h1>Learn the digital skills employers <span>pay for</span>, in 8 weeks.</h1>
+        <p class="lead">Live classes, real projects and a mentor in your corner. Start with a free 90-minute masterclass and see if it's for you.</p>
+        <div class="actions">
+          <a class="btn" href="#">Save my free seat →</a>
+          <a class="btn btn-ghost" href="#">See the courses</a>
+        </div>
+        <div class="timer">
+          <div><b>02</b><small>days</small></div>
+          <div><b>14</b><small>hours</small></div>
+          <div><b>36</b><small>mins</small></div>
+          <p>until the next masterclass starts</p>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1000&q=75&auto=format&fit=crop" alt="A student working on a laptop during a live class">
+        <div class="card c1"><span class="ic">★</span><div><b>4.8 / 5</b>from 1,900 students</div></div>
+        <div class="card c2">
+          <div class="avs">
+            <i style="background-image:url(https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&q=60)"></i>
+            <i style="background-image:url(https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&q=60)"></i>
+            <i style="background-image:url(https://images.unsplash.com/photo-1617137968427-85924c800a22?w=80&h=80&fit=crop&q=60)"></i>
+          </div>
+          <div><b>1,240</b>joined this month</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap logos">
+      <span>Our graduates now work at</span>
+      <span>Northwind</span><span>Lumen Bank</span><span>Orbitly</span><span>Kora Health</span><span>Fieldstack</span>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="center">
+          <p class="kicker">Courses</p>
+          <h2>Pick a path. Get job-ready.</h2>
+          <p>Every course is live, project-based and ends with a portfolio you can show employers.</p>
+        </div>
+        <div class="tracks">
+          <article class="track">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=70&auto=format&fit=crop" alt="Two people reviewing a design on a laptop">
+            <div class="body">
+              <div class="row"><span class="level">Beginner</span><span>8 weeks · Live</span></div>
+              <h3>UI/UX Design</h3>
+              <p>Design apps and websites in Figma, from wireframe to polished prototype.</p>
+              <div class="foot"><b>$299</b><a href="#">View course →</a></div>
+            </div>
+          </article>
+          <article class="track">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=70&auto=format&fit=crop" alt="Team planning a marketing campaign with sticky notes">
+            <div class="body">
+              <div class="row"><span class="level">Beginner</span><span>8 weeks · Live</span></div>
+              <h3>Digital Marketing</h3>
+              <p>Run ads, grow social pages and write emails that sell, with real budgets.</p>
+              <div class="foot"><b>$279</b><a href="#">View course →</a></div>
+            </div>
+          </article>
+          <article class="track">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=70&auto=format&fit=crop" alt="Students working together on laptops">
+            <div class="body">
+              <div class="row"><span class="level">Intermediate</span><span>10 weeks · Live</span></div>
+              <h3>Data Analysis</h3>
+              <p>Excel, SQL and dashboards. Turn messy data into decisions.</p>
+              <div class="foot"><b>$349</b><a href="#">View course →</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how">
+      <div class="wrap">
+        <div class="center">
+          <p class="kicker">How it works</p>
+          <h2>From first class to first offer</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><span>1</span><h3>Join the masterclass</h3><p>A free 90-minute live session to try the teaching style.</p></div>
+          <div class="step"><span>2</span><h3>Learn live, twice a week</h3><p>Evening classes that fit around your job, with recordings.</p></div>
+          <div class="step"><span>3</span><h3>Build real projects</h3><p>Finish with 3 portfolio pieces reviewed by your mentor.</p></div>
+          <div class="step"><span>4</span><h3>Get career support</h3><p>CV reviews, mock interviews and introductions to hiring partners.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=70&auto=format&fit=crop" alt="Portrait of lead instructor Ruth Daniels">
+        <div>
+          <p class="kicker">Meet your lead mentor</p>
+          <h2>Learn from people who do the work every day.</h2>
+          <p class="bio">Ruth Daniels has led product design teams for 11 years. She built Bright Path to teach the skills she looks for when she hires.</p>
+          <div class="creds">
+            <div><b>11 yrs</b><span>in product design</span></div>
+            <div><b>3,000+</b><span>students taught</span></div>
+            <div><b>86%</b><span>hired within 6 months</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="center"><p class="kicker">Success stories</p><h2>Students who made the switch</h2></div>
+        <div class="quotes">
+          <div class="quote"><span class="st">★★★★★</span><p>“I went from retail to a junior designer role in five months. The projects got me the interview.”</p><div class="who"><i style="background-image:url(https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=60)"></i><div><b>Tolu A.</b>UI Designer</div></div></div>
+          <div class="quote"><span class="st">★★★★★</span><p>“The live classes kept me accountable. I actually finished, which never happened with video courses.”</p><div class="who"><i style="background-image:url(https://images.unsplash.com/photo-1617137968427-85924c800a22?w=100&h=100&fit=crop&q=60)"></i><div><b>James O.</b>Marketing Executive</div></div></div>
+          <div class="quote"><span class="st">★★★★★</span><p>“My mentor reviewed every project. That feedback was worth the whole price on its own.”</p><div class="who"><i style="background-image:url(https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&q=60)"></i><div><b>Funmi E.</b>Data Analyst</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="final">
+        <div>
+          <h2>Your new career starts <span>Thursday.</span></h2>
+          <p>Free, live and 90 minutes. Bring your questions.</p>
+        </div>
+        <form onsubmit="return false">
+          <input type="text" placeholder="First name" aria-label="First name">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <button class="btn" type="submit">Save my free seat</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <a class="logo" href="#"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#ffd34d"/><path d="M9 29c6 0 8-4 11-9s5-9 11-9" fill="none" stroke="#2b1f5c" stroke-width="3.2" stroke-linecap="round"/><circle cx="31" cy="11" r="3.2" fill="#2b1f5c"/></svg>Bright Path</a>
+        <ul><li>Courses</li><li>Mentors</li><li>FAQ</li><li>Contact</li></ul>
+      </div>
+      <div class="legal"><span>© 2026 Bright Path Academy</span><span>Website by McAnthony</span></div>
+    </div>
+  </footer>
+</body>
+</html>

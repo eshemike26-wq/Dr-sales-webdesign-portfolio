@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hudson Threads — Everyday clothing, made to last</title>
+  <meta name="description" content="Hudson Threads makes considered everyday clothing in natural fabrics. Shop the new season.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #eceae4;
+      --paper-2: #e2ded5;
+      --ink: #141414;
+      --muted: #6b6862;
+      --rust: #a4472b;
+      --line: rgba(20, 20, 20, .14);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.55 'Inter Tight', system-ui, sans-serif; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    .wrap { padding: 0 36px; }
+    .display { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; font-weight: 400; letter-spacing: -.005em; }
+
+    .strip { background: var(--ink); color: var(--paper); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; overflow: hidden; white-space: nowrap; padding: 9px 0; }
+    .strip span { padding: 0 28px; }
+
+    header { border-bottom: 1px solid var(--line); }
+    .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 74px; }
+    .nav ul { display: flex; gap: 28px; font-size: 14px; font-weight: 500; }
+    .logo { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+    .logo b { font: 400 30px/1 'Anton', sans-serif; letter-spacing: .22em; padding-left: .22em; }
+    .logo small { margin-top: 3px; font-size: 9px; letter-spacing: .5em; padding-left: .5em; }
+    .right { justify-self: end; display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; min-height: 780px; border-bottom: 1px solid var(--line); }
+    .hero-img { position: relative; overflow: hidden; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img .tagline { position: absolute; left: 28px; bottom: 26px; color: #fff; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding: 44px 40px 40px; border-left: 1px solid var(--line); }
+    .season { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .hero h1 { font-size: clamp(100px, 11.5vw, 196px); line-height: .84; }
+    .hero h1 span { color: var(--rust); }
+    .hero-copy p { max-width: 360px; font-size: 17px; color: var(--muted); }
+    .btns { display: flex; gap: 10px; margin-top: 26px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+    .btn-line { background: none; color: var(--ink); border: 1px solid var(--ink); }
+
+    .cats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+    .cat { position: relative; overflow: hidden; }
+    .cat + .cat { border-left: 1px solid var(--line); }
+    .cat img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform .8s; }
+    .cat:hover img { transform: scale(1.04); }
+    .cat .label { position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; justify-content: space-between; align-items: end; color: #fff; }
+    .cat .label b { font: 400 54px/1 'Anton', sans-serif; text-transform: uppercase; text-shadow: 0 2px 20px rgba(0, 0, 0, .25); }
+    .cat .label span { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid #fff; }
+
+    section { padding: 90px 0; }
+    .head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 36px; }
+    .head h2 { font-size: 72px; line-height: .9; }
+    .head a { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid currentColor; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .item .ph { position: relative; background: var(--paper-2); overflow: hidden; }
+    .item .ph img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform .7s; }
+    .item:hover .ph img { transform: scale(1.04); }
+    .item .new { position: absolute; top: 12px; left: 12px; padding: 4px 10px; background: var(--paper); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    .item .quick { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 12px; background: var(--paper); text-align: center; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: 0; transform: translateY(10px); transition: .35s; }
+    .item:hover .quick { opacity: 1; transform: none; }
+    .item .info { display: flex; justify-content: space-between; margin-top: 14px; font-weight: 500; }
+    .item .sub { color: var(--muted); font-size: 14px; }
+    .swatches { display: flex; gap: 6px; margin-top: 8px; }
+    .swatches i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--line); }
+
+    .story { display: grid; grid-template-columns: 1fr 1fr; background: var(--ink); color: var(--paper); }
+    .story img { width: 100%; height: 100%; object-fit: cover; min-height: 600px; }
+    .story-copy { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .story-copy small { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #b5b1a8; }
+    .story h2 { margin-top: 18px; font-size: 84px; line-height: .88; }
+    .story h2 span { color: #e08a6a; }
+    .story p { margin-top: 24px; max-width: 420px; color: #c7c3ba; font-size: 17px; }
+    .story .btn { background: var(--paper); color: var(--ink); align-self: flex-start; margin-top: 34px; }
+
+    .perks { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--line); }
+    .perks div { padding: 30px 28px; }
+    .perks div + div { border-left: 1px solid var(--line); }
+    .perks b { display: block; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+    .perks span { color: var(--muted); font-size: 14px; }
+
+    footer { padding: 80px 0 30px; }
+    .big { font-size: 23vw; line-height: .8; text-align: center; letter-spacing: .02em; }
+    .foot { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+    .foot ul { display: flex; gap: 24px; }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 0 18px; }
+      .nav ul { display: none; }
+      .hero, .story { grid-template-columns: 1fr; }
+      .hero-img { min-height: 520px; }
+      .cats, .grid, .perks { grid-template-columns: 1fr 1fr; }
+      .head h2 { font-size: 48px; }
+      .story-copy { padding: 48px 24px; }
+      .story h2 { font-size: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="strip"><span>Free shipping over $80</span><span>·</span><span>Free 30-day returns</span><span>·</span><span>New season out now</span><span>·</span><span>Free shipping over $80</span><span>·</span><span>Free 30-day returns</span></div>
+
+  <header>
+    <div class="wrap nav">
+      <ul>
+        <li><a href="#">New in</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Essentials</a></li>
+        <li><a href="#">Journal</a></li>
+      </ul>
+      <a class="logo" href="#"><b>HUDSON</b><small>THREADS</small></a>
+      <div class="right"><a href="#">Search</a><a href="#">Account</a><a href="#">Bag (1)</a></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=1400&q=75&auto=format&fit=crop" alt="Woman in a checked wool coat on a city street">
+        <p class="tagline">The Harlow Coat · Pure wool · $189</p>
+      </div>
+      <div class="hero-copy">
+        <div class="season"><span>Autumn / Winter 26</span><span>Collection 04</span></div>
+        <h1 class="display">New <br>season <br><span>layers</span></h1>
+        <div>
+          <p>Heavy wools, soft knits and coats built for real winters. Made in small runs, designed to wear for years.</p>
+          <div class="btns"><a class="btn" href="#">Shop women</a><a class="btn btn-line" href="#">Shop men</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cats">
+      <a class="cat" href="#"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=70&auto=format&fit=crop" alt="Woman in a floral dress by the sea"><div class="label"><b>Women</b><span>Shop now</span></div></a>
+      <a class="cat" href="#"><img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800&q=70&auto=format&fit=crop" alt="Man in a navy suit"><div class="label"><b>Men</b><span>Shop now</span></div></a>
+      <a class="cat" href="#"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=70&auto=format&fit=crop" alt="Neutral clothes on a rail"><div class="label"><b>Essentials</b><span>Shop now</span></div></a>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="head"><h2 class="display">New in</h2><a href="#">View all 64</a></div>
+        <div class="grid">
+          <article class="item">
+            <div class="ph"><span class="new">New</span><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&q=70&auto=format&fit=crop" alt="Cream open-knit top"><span class="quick">Quick add</span></div>
+            <div class="info"><span>Open-Knit Poncho</span><span>$72</span></div>
+            <p class="sub">Organic cotton</p>
+            <div class="swatches"><i style="background:#efe6d6"></i><i style="background:#2b2b2b"></i></div>
+          </article>
+          <article class="item">
+            <div class="ph"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=70&auto=format&fit=crop" alt="Rust bomber jacket"><span class="quick">Quick add</span></div>
+            <div class="info"><span>Rust Bomber Jacket</span><span>$128</span></div>
+            <p class="sub">Recycled nylon</p>
+            <div class="swatches"><i style="background:#b0653f"></i><i style="background:#3d4a3a"></i><i style="background:#141414"></i></div>
+          </article>
+          <article class="item">
+            <div class="ph"><span class="new">Bestseller</span><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=70&auto=format&fit=crop" alt="Heavyweight white t-shirt"><span class="quick">Quick add</span></div>
+            <div class="info"><span>Heavyweight Tee</span><span>$38</span></div>
+            <p class="sub">240gsm cotton</p>
+            <div class="swatches"><i style="background:#fff"></i><i style="background:#141414"></i><i style="background:#a6a090"></i></div>
+          </article>
+          <article class="item">
+            <div class="ph"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=70&auto=format&fit=crop" alt="Blush relaxed trousers"><span class="quick">Quick add</span></div>
+            <div class="info"><span>Relaxed Cuff Trousers</span><span>$64</span></div>
+            <p class="sub">Linen blend</p>
+            <div class="swatches"><i style="background:#e8b8a8"></i><i style="background:#d8cfbd"></i></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="story">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000&q=70&auto=format&fit=crop" alt="Model in a light blue coat in front of a cathedral">
+      <div class="story-copy">
+        <small>The Hudson promise</small>
+        <h2 class="display">Buy less. <br><span>Wear it more.</span></h2>
+        <p>Every piece is made in small runs from natural or recycled fabrics, then tested for 50 washes before it goes on sale.</p>
+        <a class="btn" href="#">Our story</a>
+      </div>
+    </div>
+
+    <div class="perks">
+      <div><b>Free shipping</b><span>On every order over $80</span></div>
+      <div><b>30-day returns</b><span>Free and easy, no questions</span></div>
+      <div><b>Repairs for life</b><span>We fix what we make</span></div>
+      <div><b>Pay in 4</b><span>Interest-free instalments</span></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="display big">Hudson</p>
+      <div class="foot"><span>© 2026 Hudson Threads</span><ul><li>Instagram</li><li>TikTok</li><li>Help</li></ul><span>Website by McAnthony</span></div>
+    </div>
+  </footer>
+</body>
+</html>

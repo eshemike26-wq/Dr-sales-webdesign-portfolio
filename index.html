@@ -3,648 +3,448 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dr Sales — Growth Marketing Strategist</title>
-  <meta name="description" content="Dr Sales helps brands turn attention into revenue with growth strategy, paid ads, funnels and retention marketing.">
+  <title>McAnthony — Web Designer &amp; Developer</title>
+  <meta name="description" content="McAnthony (Dr Sales) designs and builds fast, modern websites and landing pages that turn visitors into customers.">
+  <meta name="theme-color" content="#0d0e0b">
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=8">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css?v=29">
+  <script>
+    // Runs before paint: enables JS-only styles and decides whether to show the intro loader
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var seen = false;
+      try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) {}
+      if (!reduce && !seen) root.classList.add('is-loading');
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" id="top">
-    <div class="container header-inner">
+  <!-- Intro loader: counts to 100 then slides away (first visit per session only) -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader-top">
+      <span>McAnthony</span>
+      <span>Web designer</span>
+    </div>
+    <p class="preloader-count"><span data-count-out>0</span></p>
+    <div class="preloader-bar"><span></span></div>
+  </div>
+
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
       <a class="brand" href="#top" aria-label="Dr Sales, back to top">
-        <img src="assets/img/logo.svg" alt="" width="36" height="36">
+        <img src="assets/img/logo.svg" alt="" width="30" height="30">
         <span class="brand-name"><span class="brand-d">D</span>r Sales</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#work"><span class="nav-num" aria-hidden="true">01</span>Work</a></li>
+          <li><a href="#services"><span class="nav-num" aria-hidden="true">02</span>Services</a></li>
+          <li><a href="#pricing"><span class="nav-num" aria-hidden="true">03</span>Pricing</a></li>
+          <li><a href="#testimonials"><span class="nav-num" aria-hidden="true">04</span>Clients</a></li>
+          <li><a href="#contact"><span class="nav-num" aria-hidden="true">05</span>Contact</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn-orange btn-sm header-cta" href="#contact">
+        <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        Let's talk
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
         <span class="sr-only">Menu</span>
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
-
-      <nav class="site-nav" id="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-        </ul>
-        <a class="btn btn-dark" href="#contact">Contact</a>
-      </nav>
     </div>
   </header>
 
-  <!-- Floating call to action: appears after the hero, hides at the contact form -->
-  <a class="float-cta" href="#contact" data-float-cta>
-    <span class="float-cta-dot" aria-hidden="true"></span>
-    Get in touch
-  </a>
-
   <main id="main">
     <!-- ============ HERO ============ -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <p class="hero-hello" aria-hidden="true"><span>Hey,</span> <span>there</span></p>
-
-        <figure class="hero-photo">
-          <img src="assets/img/hero-900.webp"
-               srcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w"
-               sizes="(min-width: 960px) 44vw, 90vw"
-               width="900" height="1008"
-               alt="Dr Sales seated on a stool in a colour-block sweater"
-               fetchpriority="high">
-        </figure>
-
-        <p class="hero-status">
-          <span class="status-dot" aria-hidden="true"></span>
-          Taking on new clients for 2027
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <p class="badge hero-in" style="--d:0">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Available for new projects
         </p>
-
-        <!-- PLACEHOLDER: edit your specialities -->
-        <p class="hero-focus">Paid ads, lead generation, funnels, email and CRM for brands that want measurable revenue.</p>
-
-        <h1 class="hero-title" id="hero-title">
-          <span class="hero-iam">I am</span>
-          <span class="hero-name">Dr Sales</span>
-          <span class="hero-realname">McAnthony</span>
-        </h1>
-
-        <p class="hero-role">Growth <br>Marketing <br>Strategist</p>
+        <p class="hero-role hero-in" style="--d:1">Web designer <br>&amp; developer who <br><em>knows how to sell</em></p>
       </div>
+
+      <figure class="hero-photo">
+        <img src="assets/img/hero-cutout.webp"
+             width="1283" height="1226"
+             alt="McAnthony in glasses and a black t-shirt, looking to the side"
+             fetchpriority="high">
+      </figure>
+
+      <div class="hero-right">
+        <p class="hero-intro hero-in" style="--d:2">Hi, I'm McAnthony. I design and build websites and landing pages that look sharp, load fast and turn visitors into paying customers.</p>
+        <a class="btn btn-orange hero-in" style="--d:3" href="#work">
+          <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          See my work
+        </a>
+      </div>
+
+      <!-- Solid name sits behind the photo; the outline copy sits in front,
+           so the letters turn see-through where they cross the photo -->
+      <h1 class="hero-name" id="hero-title" data-split>McAnthony</h1>
+      <p class="hero-name hero-name-outline" aria-hidden="true" data-split>McAnthony</p>
     </section>
 
-    <!-- ============ SERVICES ============ -->
-    <!-- PLACEHOLDER: services copy -->
-    <section class="section services" id="services" aria-labelledby="services-title">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="display" id="services-title">What I do</h2>
-          <p class="section-lede">Everything a business needs to find customers, win them and keep them. Most clients start with a strategy sprint and add the rest as they grow.</p>
-        </div>
-
-        <ol class="service-list">
-          <li class="service">
-            <span class="service-num" aria-hidden="true">01</span>
-            <h3>Growth strategy</h3>
-            <p>A clear plan built on your numbers: who to target, which channels to use, and what to measure each week.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">02</span>
-            <h3>Paid ads</h3>
-            <p>Meta, Google and TikTok campaigns with creative testing, tight budgets and weekly reporting you can read.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">03</span>
-            <h3>Funnels and conversion</h3>
-            <p>Landing pages, offers and checkout flows that turn clicks into paying customers.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">04</span>
-            <h3>Email and retention</h3>
-            <p>Welcome, abandoned-cart and win-back sequences that bring customers back without more ad spend.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">05</span>
-            <h3>Lead magnets</h3>
-            <p>Free guides, quizzes, checklists and trials that get the right people to raise their hand and share their details.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">06</span>
-            <h3>CRM and relationship management</h3>
-            <p>Set up and clean up your CRM so every lead is tracked, followed up on time and never falls through the cracks.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">07</span>
-            <h3>Social media content</h3>
-            <p>Content plans and posts that build trust with your audience and warm them up before you ask for the sale.</p>
-          </li>
-          <li class="service">
-            <span class="service-num" aria-hidden="true">08</span>
-            <h3>Analytics and reporting</h3>
-            <p>Tracking set up properly and simple dashboards that show where your sales come from and where money is wasted.</p>
-          </li>
-        </ol>
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Landing pages</span><i>+</i><span>Business websites</span><i>+</i><span>Online stores</span><i>+</i><span>UI/UX design</span><i>+</i><span>Redesigns</span><i>+</i><span>Webflow</span><i>+</i><span>WordPress</span><i>+</i>
+        <span>Landing pages</span><i>+</i><span>Business websites</span><i>+</i><span>Online stores</span><i>+</i><span>UI/UX design</span><i>+</i><span>Redesigns</span><i>+</i><span>Webflow</span><i>+</i><span>WordPress</span><i>+</i>
       </div>
-    </section>
+    </div>
 
-    <!-- ============ ABOUT + STATS ============ -->
-    <!-- PLACEHOLDER: bio and numbers -->
+    <!-- ============ ABOUT ============ -->
+    <!-- PLACEHOLDER: check the numbers below -->
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="container about-grid">
         <div class="about-copy">
-          <h2 class="display" id="about-title">Turning attention into revenue</h2>
-          <p class="about-text">I started in sales in 2021, talking to customers every day. That taught me what makes people buy. Now I build marketing systems around the same idea: understand the customer, make one clear offer, and measure everything.</p>
+          <p class="eyebrow reveal">About me</p>
+          <h2 class="sr-only" id="about-title">About McAnthony</h2>
+          <p class="about-statement" data-fill>I spent years in sales before I designed my first website. So every page I build has one job: turn the people who visit into people who buy.</p>
 
           <dl class="stats">
-            <div class="stat">
-              <dt>Revenue generated from ads</dt>
-              <dd>$300K+</dd>
+            <div class="stat reveal">
+              <dt>Websites and landing pages launched</dt>
+              <dd>20+</dd>
             </div>
-            <div class="stat">
-              <dt>Campaigns launched</dt>
-              <dd>60+</dd>
+            <div class="stat reveal" style="--d:1">
+              <dt>In sales, marketing and design</dt>
+              <dd>5 yrs</dd>
             </div>
-            <div class="stat">
-              <dt>Years in sales and marketing</dt>
-              <dd>5</dd>
+            <div class="stat reveal" style="--d:2">
+              <dt>To reply to every enquiry</dt>
+              <dd>1 day</dd>
             </div>
           </dl>
         </div>
 
-        <figure class="about-photo">
+        <figure class="about-photo reveal-img">
           <img src="assets/img/workspace-1000.webp"
                srcset="assets/img/workspace-1000.webp 1000w, assets/img/workspace-1800.webp 1800w"
-               sizes="(min-width: 960px) 50vw, 92vw"
+               sizes="(min-width: 860px) 32vw, 92vw"
                width="1000" height="558" loading="lazy"
-               alt="Desk with a monitor showing a website design, a laptop with code, and design books">
+               alt="Desk with a monitor showing a website design in progress, a laptop with code and design books">
+          <figcaption>Design that looks good <em>and</em> sells.</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- ============ EXPERIENCE & SKILLS ============ -->
-    <!-- PLACEHOLDER: roles, years and tools -->
-    <section class="section experience" id="experience" aria-labelledby="experience-title">
-      <div class="container">
-        <div class="xp-head">
-          <h2 class="display" id="experience-title">Experience &amp; skills</h2>
-          <div class="xp-controls">
-            <p class="xp-counter" aria-hidden="true"><span data-xp-current>01</span> / <span data-xp-total>06</span></p>
-            <button class="xp-arrow" type="button" data-xp-prev aria-label="Previous skill">
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button class="xp-arrow" type="button" data-xp-next aria-label="Next skill">
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="xp-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Experience by skill. Use the arrow buttons or swipe to see more.">
-        <!-- 1. Paid ads -->
-        <article class="xp-slide" aria-roledescription="slide" aria-label="1 of 6">
-          <div class="xp-visual xp-visual-orange" aria-hidden="true">
-            <div class="mock">
-              <div class="mock-bar"><span></span><span></span><span></span><b>Ads Manager</b></div>
-              <div class="mock-kpis">
-                <div><small>Spend</small><strong>$4,820</strong></div>
-                <div><small>Revenue</small><strong>$14,960</strong></div>
-                <div><small>ROAS</small><strong>3.1×</strong></div>
-              </div>
-              <div class="mock-chart">
-                <i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:63%"></i><i style="--h:58%"></i><i style="--h:76%"></i><i style="--h:92%"></i>
-              </div>
-            </div>
-          </div>
-          <div class="xp-body">
-            <p class="xp-years">2021 – now</p>
-            <h3>Paid ad management</h3>
-            <p>Planning, launching and scaling ad campaigns on Meta, Google and TikTok, with weekly creative tests and budgets that only grow when the numbers say so.</p>
-            <ul class="xp-highlights">
-              <li>$300K+ in revenue generated from ads</li>
-              <li>Budgets managed from $500 to $10K a month</li>
-            </ul>
-            <ul class="xp-tools" aria-label="Tools">
-              <li>Meta Ads</li><li>Google Ads</li><li>TikTok Ads</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 2. Sales -->
-        <article class="xp-slide" aria-roledescription="slide" aria-label="2 of 6">
-          <div class="xp-visual xp-visual-green" aria-hidden="true">
-            <div class="mock">
-              <div class="mock-bar"><span></span><span></span><span></span><b>Deals this month</b></div>
-              <ul class="mock-rows">
-                <li><span class="mock-avatar">AK</span>Retail order<em class="mock-pill">Won</em></li>
-                <li><span class="mock-avatar">JO</span>Service package<em class="mock-pill">Won</em></li>
-                <li><span class="mock-avatar">FB</span>Annual renewal<em class="mock-pill mock-pill-soft">Follow up</em></li>
-                <li><span class="mock-avatar">ME</span>New enquiry<em class="mock-pill mock-pill-soft">Call booked</em></li>
-              </ul>
-            </div>
-          </div>
-          <div class="xp-body">
-            <p class="xp-years">2021 – 2023</p>
-            <h3>Sales and client relationships</h3>
-            <p>Where it started: speaking to customers every day, handling objections and closing deals. It is the reason every campaign I build starts with the customer.</p>
-            <ul class="xp-highlights">
-              <li>Consistently hit monthly sales targets</li>
-              <li>Built a base of repeat and referral clients</li>
-            </ul>
-            <ul class="xp-tools" aria-label="Tools">
-              <li>WhatsApp Business</li><li>Google Sheets</li><li>LinkedIn</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 3. Lead magnets -->
-        <article class="xp-slide" aria-roledescription="slide" aria-label="3 of 6">
-          <div class="xp-visual xp-visual-sand" aria-hidden="true">
-            <div class="mock mock-center">
-              <p class="mock-kicker">Free guide</p>
-              <p class="mock-title">7 ways to get more customers from Instagram</p>
-              <div class="mock-input">your@email.com</div>
-              <div class="mock-button">Send me the guide</div>
-              <p class="mock-note">2,140 downloads</p>
-            </div>
-          </div>
-          <div class="xp-body">
-            <p class="xp-years">2022 – now</p>
-            <h3>Lead generation and lead magnets</h3>
-            <p>Free guides, quizzes and offers that turn strangers into leads, paired with ads and landing pages that bring the right people in.</p>
-            <ul class="xp-highlights">
-              <li>15+ lead magnets created for clients</li>
-              <li>Cost per lead cut by up to 40%</li>
-            </ul>
-            <ul class="xp-tools" aria-label="Tools">
-              <li>Canva</li><li>Typeform</li><li>Meta Lead Ads</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 4. Funnels -->
-        <article class="xp-slide" aria-roledescription="slide" aria-label="4 of 6">
-          <div class="xp-visual xp-visual-ink" aria-hidden="true">
-            <div class="mock">
-              <div class="mock-bar"><span></span><span></span><span></span><b>Funnel</b></div>
-              <div class="mock-funnel">
-                <div style="--w:100%"><span>Visitors</span><b>8,400</b></div>
-                <div style="--w:72%"><span>Leads</span><b>1,260</b></div>
-                <div style="--w:48%"><span>Calls</span><b>310</b></div>
-                <div style="--w:30%"><span>Sales</span><b>96</b></div>
-              </div>
-            </div>
-          </div>
-          <div class="xp-body">
-            <p class="xp-years">2023 – now</p>
-            <h3>Funnels and landing pages</h3>
-            <p>Landing pages, offers and booking flows built to convert, then tested and improved step by step until fewer visitors are lost along the way.</p>
-            <ul class="xp-highlights">
-              <li>20+ funnels and landing pages launched</li>
-              <li>Conversion rates doubled on rebuilt pages</li>
-            </ul>
-            <ul class="xp-tools" aria-label="Tools">
-              <li>GoHighLevel</li><li>Systeme.io</li><li>Hotjar</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 5. Email -->
-        <article class="xp-slide" aria-roledescription="slide" aria-label="5 of 6">
-          <div class="xp-visual xp-visual-orange" aria-hidden="true">
-            <div class="mock">
-              <div class="mock-bar"><span></span><span></span><span></span><b>Welcome flow</b></div>
-              <ol class="mock-flow">
-                <li><b>Trigger</b> Joins the list</li>
-                <li><b>Email 1</b> Welcome and free gift</li>
-                <li><b>Wait</b> 2 days</li>
-                <li><b>Email 2</b> Best sellers</li>
-                <li><b>Email 3</b> 10% off, ends Friday</li>
-              </ol>
-            </div>
-          </div>
-          <div class="xp-body">
-            <p class="xp-years">2023 – now</p>
-            <h3>Email marketing and automation</h3>
-            <p>Welcome, abandoned-cart and win-back flows that keep selling in the background, plus weekly campaigns people actually open.</p>
-            <ul class="xp-highlights">
-              <li>Average open rates above 40%</li>
-              <li>Email driving up to 30% of store revenue</li>
-            </ul>
-            <ul class="xp-tools" aria-label="Tools">
-              <li>Klaviyo</li><li>Mailchimp</li><li>Brevo</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 6. CRM -->
-        <article class="xp-slide" aria-roledescription="slide" aria-label="6 of 6">
-          <div class="xp-visual xp-visual-green" aria-hidden="true">
-            <div class="mock">
-              <div class="mock-bar"><span></span><span></span><span></span><b>Pipeline</b></div>
-              <div class="mock-kanban">
-                <div><small>New</small><i></i><i></i><i></i></div>
-                <div><small>Contacted</small><i></i><i></i></div>
-                <div><small>Proposal</small><i></i><i></i></div>
-                <div><small>Won</small><i class="is-won"></i><i class="is-won"></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="xp-body">
-            <p class="xp-years">2024 – now</p>
-            <h3>CRM and relationship management</h3>
-            <p>Setting up pipelines, follow-up reminders and automations so every lead gets a fast reply and no customer is forgotten after the first sale.</p>
-            <ul class="xp-highlights">
-              <li>Lead response time cut from days to minutes</li>
-              <li>CRMs set up for agencies, stores and coaches</li>
-            </ul>
-            <ul class="xp-tools" aria-label="Tools">
-              <li>HubSpot</li><li>Zoho CRM</li><li>GoHighLevel</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-
-      <div class="container">
-        <div class="xp-progress" aria-hidden="true"><span></span></div>
-      </div>
-    </section>
-
-    <!-- ============ RECENT WORK ============ -->
-    <!-- PLACEHOLDER: client names, numbers and dashboards are examples. Replace with your real projects. -->
+    <!-- ============ SELECTED WORK ============ -->
+    <!-- PLACEHOLDER: these four projects are sample sites in /work. Swap in your real work (name, type, year, result, link). -->
     <section class="section work" id="work" aria-labelledby="work-title">
       <div class="container">
-        <div class="work-head">
-          <h2 class="display" id="work-title">Recent projects</h2>
-          <p class="work-lede">Pick a project to see the dashboard behind it.</p>
+        <div class="section-head">
+          <h2 class="display" id="work-title"><span class="mask"><span>Selected</span></span> <span class="mask"><span class="outline">work</span></span></h2>
+          <p class="section-lede reveal">A few recent sites. Each one was designed around a single goal: more sales, more leads or more bookings.</p>
         </div>
 
-        <div class="proj-tabs" role="tablist" aria-label="Projects">
-          <button class="proj-tab" type="button" role="tab" id="tab-ads" aria-controls="panel-ads" aria-selected="true">
-            <span class="proj-tab-kind">Paid ads</span>
-            <span class="proj-tab-client">Glow Naturals</span>
-          </button>
-          <button class="proj-tab" type="button" role="tab" id="tab-crm" aria-controls="panel-crm" aria-selected="false" tabindex="-1">
-            <span class="proj-tab-kind">CRM</span>
-            <span class="proj-tab-client">Keystone Homes</span>
-          </button>
-          <button class="proj-tab" type="button" role="tab" id="tab-funnel" aria-controls="panel-funnel" aria-selected="false" tabindex="-1">
-            <span class="proj-tab-kind">Funnel</span>
-            <span class="proj-tab-client">Bright Path Academy</span>
-          </button>
-          <button class="proj-tab" type="button" role="tab" id="tab-email" aria-controls="panel-email" aria-selected="false" tabindex="-1">
-            <span class="proj-tab-kind">Email</span>
-            <span class="proj-tab-client">Hudson Threads</span>
-          </button>
-        </div>
-
-        <!-- ===== Project 1: Paid ads ===== -->
-        <div class="proj-panel is-active" role="tabpanel" id="panel-ads" aria-labelledby="tab-ads" tabindex="0">
-          <div class="proj-info">
-            <p class="proj-client">Glow Naturals · Skincare</p>
-            <h3>Launching a skincare line on Meta ads</h3>
-            <p>A new serum launch with a small budget. I set up the campaign structure, tested 24 ad creatives and moved budget weekly to the ads that sold.</p>
-            <p class="proj-result"><span class="proj-result-num" data-count="3.1" data-decimals="1" data-suffix="×">3.1×</span> return on ad spend in 90 days</p>
-            <ul class="proj-tags" aria-label="Services used"><li>Meta ads</li><li>Creative testing</li><li>Retargeting</li></ul>
-          </div>
-
-          <div class="dash" aria-hidden="true">
-            <div class="dash-top">
-              <span class="dash-dots"><i></i><i></i><i></i></span>
-              <b>Ads Manager</b>
-              <span class="dash-pill">Last 90 days</span>
-            </div>
-            <div class="dash-body">
-              <div class="dash-kpis">
-                <div class="kpi"><small>Amount spent</small><strong data-count="15720" data-prefix="$">$15,720</strong></div>
-                <div class="kpi"><small>Purchase value</small><strong data-count="48630" data-prefix="$">$48,630</strong></div>
-                <div class="kpi"><small>ROAS</small><strong data-count="3.09" data-decimals="2" data-suffix="×">3.09×</strong></div>
-                <div class="kpi"><small>Cost per purchase</small><strong data-count="11.4" data-decimals="2" data-prefix="$">$11.40</strong></div>
-              </div>
-
-              <div class="dash-chart">
-                <div class="dash-legend"><span class="lg-orange">Revenue</span><span class="lg-green">Spend</span></div>
-                <svg viewBox="0 0 600 180" preserveAspectRatio="none">
-                  <g class="grid"><line x1="0" y1="45" x2="600" y2="45"/><line x1="0" y1="90" x2="600" y2="90"/><line x1="0" y1="135" x2="600" y2="135"/></g>
-                  <path class="area" d="M0 160 L50 150 L100 152 L150 132 L200 128 L250 110 L300 114 L350 92 L400 80 L450 74 L500 52 L550 40 L600 28 L600 180 L0 180Z"/>
-                  <path class="line line-orange" pathLength="1" d="M0 160 L50 150 L100 152 L150 132 L200 128 L250 110 L300 114 L350 92 L400 80 L450 74 L500 52 L550 40 L600 28"/>
-                  <path class="line line-green" pathLength="1" d="M0 168 L50 164 L100 163 L150 156 L200 154 L250 148 L300 149 L350 140 L400 136 L450 133 L500 126 L550 121 L600 116"/>
-                </svg>
-              </div>
-
-              <table class="dash-table">
-                <thead><tr><th>Campaign</th><th>Status</th><th>Spend</th><th>ROAS</th></tr></thead>
-                <tbody>
-                  <tr><td>UGC video · Serum launch</td><td><em class="st st-on">Active</em></td><td>$6,240</td><td><span class="roas" style="--r:86%"></span>3.6×</td></tr>
-                  <tr><td>Carousel · Best sellers</td><td><em class="st st-on">Active</em></td><td>$4,980</td><td><span class="roas" style="--r:69%"></span>2.9×</td></tr>
-                  <tr><td>Retargeting · Cart viewers</td><td><em class="st st-on">Active</em></td><td>$2,310</td><td><span class="roas" style="--r:100%"></span>4.2×</td></tr>
-                  <tr><td>Static · Brand awareness</td><td><em class="st st-off">Paused</em></td><td>$2,190</td><td><span class="roas" style="--r:33%"></span>1.4×</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- ===== Project 2: CRM ===== -->
-        <div class="proj-panel" role="tabpanel" id="panel-crm" aria-labelledby="tab-crm" tabindex="0" hidden>
-          <div class="proj-info">
-            <p class="proj-client">Keystone Homes · Real estate</p>
-            <h3>A CRM that follows up on every lead</h3>
-            <p>Leads from Google Ads and a free buyer's guide were sitting in inboxes for days. I set up a HubSpot pipeline with instant replies, reminders and viewing bookings.</p>
-            <p class="proj-result"><span class="proj-result-num" data-count="4" data-suffix=" min">4 min</span> average reply to new leads, down from 2 days</p>
-            <ul class="proj-tags" aria-label="Services used"><li>HubSpot</li><li>Automation</li><li>Lead magnet</li></ul>
-          </div>
-
-          <div class="dash" aria-hidden="true">
-            <div class="dash-top">
-              <span class="dash-dots"><i></i><i></i><i></i></span>
-              <b>Sales pipeline</b>
-              <span class="dash-pill">This quarter</span>
-            </div>
-            <div class="dash-body">
-              <div class="dash-kpis">
-                <div class="kpi"><small>New leads</small><strong data-count="486">486</strong></div>
-                <div class="kpi"><small>Avg. reply time</small><strong data-count="4" data-suffix=" min">4 min</strong></div>
-                <div class="kpi"><small>Viewings booked</small><strong data-count="132">132</strong></div>
-                <div class="kpi"><small>Deals won</small><strong data-count="27">27</strong></div>
-              </div>
-
-              <div class="kanban">
-                <div class="kcol">
-                  <p class="kcol-title">New lead <span>3</span></p>
-                  <div class="kcard"><b>Michael T.</b><small>3-bed apartment</small><em>Google Ads</em></div>
-                  <div class="kcard"><b>Sarah M.</b><small>2-bed duplex</small><em>Buyer's guide</em></div>
-                  <div class="kcard"><b>Ashley R.</b><small>Lot, half an acre</small><em>Website</em></div>
-                </div>
-                <div class="kcol">
-                  <p class="kcol-title">Contacted <span>2</span></p>
-                  <div class="kcard"><b>Grace E.</b><small>4-bed townhouse</small><em>Google Ads</em></div>
-                  <div class="kcard"><b>Kevin B.</b><small>Studio condo</small><em>Referral</em></div>
-                </div>
-                <div class="kcol">
-                  <p class="kcol-title">Viewing booked <span>2</span></p>
-                  <div class="kcard"><b>Emily S.</b><small>3-bed apartment</small><em>Buyer's guide</em></div>
-                  <div class="kcard kcard-move"><b>Daniel F.</b><small>5-bed detached</small><em>Google Ads</em></div>
-                </div>
-                <div class="kcol kcol-won">
-                  <p class="kcol-title">Won <span>27</span></p>
-                  <div class="kcard"><b>Brian H.</b><small>2-bed apartment</small><em>Buyer's guide</em></div>
-                  <div class="kcard kcard-ghost"></div>
+        <div class="work-grid">
+          <!-- Project 1 -->
+          <article class="work-card">
+            <a class="work-link" href="work/glow-naturals/" target="_blank" rel="noopener" data-cursor="View site">
+              <div class="work-visual reveal-img">
+                <div class="site">
+                  <div class="site-bar" aria-hidden="true"><i></i><i></i><i></i><span>glownaturals.com</span></div>
+                  <div class="site-view"><iframe src="work/glow-naturals/" title="Glow Naturals homepage preview" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
                 </div>
               </div>
-
-              <div class="toast"><span class="toast-dot"></span>New lead from Google Ads · auto-reply sent in 1 min</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ===== Project 3: Funnel ===== -->
-        <div class="proj-panel" role="tabpanel" id="panel-funnel" aria-labelledby="tab-funnel" tabindex="0" hidden>
-          <div class="proj-info">
-            <p class="proj-client">Bright Path Academy · Online courses</p>
-            <h3>A webinar funnel that sells the course</h3>
-            <p>Ads were sending people straight to a long sales page. I built a free webinar funnel with reminders and a timed offer, then improved each step.</p>
-            <p class="proj-result"><span class="proj-result-num" data-count="38" data-prefix="−" data-suffix="%">−38%</span> cost to get each new student</p>
-            <ul class="proj-tags" aria-label="Services used"><li>Funnels</li><li>Landing pages</li><li>Paid social</li></ul>
-          </div>
-
-          <div class="dash" aria-hidden="true">
-            <div class="dash-top">
-              <span class="dash-dots"><i></i><i></i><i></i></span>
-              <b>Webinar funnel</b>
-              <span class="dash-pill">Last 60 days</span>
-            </div>
-            <div class="dash-body">
-              <div class="funnel">
-                <div class="fstep" style="--w:100%"><span>Ad clicks</span><b data-count="12480">12,480</b></div>
-                <p class="frate">25% registered</p>
-                <div class="fstep" style="--w:74%"><span>Registrations</span><b data-count="3120">3,120</b></div>
-                <p class="frate">44% attended</p>
-                <div class="fstep" style="--w:50%"><span>Attended</span><b data-count="1370">1,370</b></div>
-                <p class="frate">15.6% bought</p>
-                <div class="fstep" style="--w:30%"><span>Students</span><b data-count="214">214</b></div>
+              <div class="work-meta">
+                <h3>Glow Naturals</h3>
+                <p>Online store · 2026</p>
               </div>
+              <span class="sr-only">(opens the live site in a new tab)</span>
+            </a>
+            <ul class="tags" aria-label="Scope"><li>E-commerce</li><li>Shopify</li><li>Product pages</li></ul>
+            <p class="work-result"><b>2×</b> more orders from mobile visitors</p>
+          </article>
 
-              <div class="compare">
-                <p class="compare-title">Cost per student</p>
-                <div class="cbar"><span>Before</span><i style="--w:100%"></i><b>$61</b></div>
-                <div class="cbar cbar-now"><span>After</span><i style="--w:62%"></i><b>$38</b></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ===== Project 4: Email ===== -->
-        <div class="proj-panel" role="tabpanel" id="panel-email" aria-labelledby="tab-email" tabindex="0" hidden>
-          <div class="proj-info">
-            <p class="proj-client">Hudson Threads · Fashion store</p>
-            <h3>Email flows that sell on autopilot</h3>
-            <p>The store only sent the odd newsletter. I built welcome, abandoned-cart, browse and win-back flows in Klaviyo, then a weekly campaign calendar.</p>
-            <p class="proj-result"><span class="proj-result-num" data-count="31" data-suffix="%">31%</span> of store revenue now comes from email</p>
-            <ul class="proj-tags" aria-label="Services used"><li>Klaviyo</li><li>Email flows</li><li>Retention</li></ul>
-          </div>
-
-          <div class="dash" aria-hidden="true">
-            <div class="dash-top">
-              <span class="dash-dots"><i></i><i></i><i></i></span>
-              <b>Email performance</b>
-              <span class="dash-pill">Last 90 days</span>
-            </div>
-            <div class="dash-body">
-              <div class="dash-kpis">
-                <div class="kpi"><small>Open rate</small><strong data-count="46.2" data-decimals="1" data-suffix="%">46.2%</strong></div>
-                <div class="kpi"><small>Click rate</small><strong data-count="4.8" data-decimals="1" data-suffix="%">4.8%</strong></div>
-                <div class="kpi"><small>Email revenue</small><strong data-count="21940" data-prefix="$">$21,940</strong></div>
-                <div class="kpi"><small>Subscribers</small><strong data-count="8650">8,650</strong></div>
-              </div>
-
-              <div class="email-grid">
-                <div class="ring">
-                  <svg viewBox="0 0 120 120">
-                    <circle class="ring-bg" cx="60" cy="60" r="50"/>
-                    <circle class="ring-fg" cx="60" cy="60" r="50" pathLength="100" style="--p:31"/>
-                  </svg>
-                  <p><b data-count="31" data-suffix="%">31%</b><small>of store revenue</small></p>
+          <!-- Project 2 -->
+          <article class="work-card">
+            <a class="work-link" href="work/keystone-homes/" target="_blank" rel="noopener" data-cursor="View site">
+              <div class="work-visual reveal-img">
+                <div class="site">
+                  <div class="site-bar" aria-hidden="true"><i></i><i></i><i></i><span>keystonehomes.com</span></div>
+                  <div class="site-view"><iframe src="work/keystone-homes/" title="Keystone Homes homepage preview" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
                 </div>
-                <ul class="flows">
-                  <li><span>Abandoned cart</span><i style="--w:100%"></i><b>$8,410</b></li>
-                  <li><span>Welcome series</span><i style="--w:93%"></i><b>$7,820</b></li>
-                  <li><span>Browse abandonment</span><i style="--w:35%"></i><b>$2,960</b></li>
-                  <li><span>Win-back</span><i style="--w:33%"></i><b>$2,750</b></li>
-                </ul>
               </div>
-            </div>
-          </div>
+              <div class="work-meta">
+                <h3>Keystone Homes</h3>
+                <p>Business website · 2026</p>
+              </div>
+              <span class="sr-only">(opens the live site in a new tab)</span>
+            </a>
+            <ul class="tags" aria-label="Scope"><li>Real estate</li><li>Webflow</li><li>Listings</li></ul>
+            <p class="work-result"><b>+64%</b> viewing requests in 3 months</p>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="work-card">
+            <a class="work-link" href="work/bright-path-academy/" target="_blank" rel="noopener" data-cursor="View site">
+              <div class="work-visual reveal-img">
+                <div class="site">
+                  <div class="site-bar" aria-hidden="true"><i></i><i></i><i></i><span>brightpath.academy</span></div>
+                  <div class="site-view"><iframe src="work/bright-path-academy/" title="Bright Path Academy homepage preview" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+                </div>
+              </div>
+              <div class="work-meta">
+                <h3>Bright Path Academy</h3>
+                <p>Landing page · 2025</p>
+              </div>
+              <span class="sr-only">(opens the live site in a new tab)</span>
+            </a>
+            <ul class="tags" aria-label="Scope"><li>Online courses</li><li>Landing page</li><li>Webinar funnel</li></ul>
+            <p class="work-result"><b>38%</b> of visitors signed up</p>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="work-card">
+            <a class="work-link" href="work/hudson-threads/" target="_blank" rel="noopener" data-cursor="View site">
+              <div class="work-visual reveal-img">
+                <div class="site">
+                  <div class="site-bar" aria-hidden="true"><i></i><i></i><i></i><span>hudsonthreads.co</span></div>
+                  <div class="site-view"><iframe src="work/hudson-threads/" title="Hudson Threads homepage preview" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+                </div>
+              </div>
+              <div class="work-meta">
+                <h3>Hudson Threads</h3>
+                <p>Store redesign · 2025</p>
+              </div>
+              <span class="sr-only">(opens the live site in a new tab)</span>
+            </a>
+            <ul class="tags" aria-label="Scope"><li>Fashion</li><li>Redesign</li><li>WooCommerce</li></ul>
+            <p class="work-result"><b>−41%</b> fewer abandoned carts</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ TESTIMONIALS ============ -->
-    <!-- PLACEHOLDER: replace with real client quotes and names -->
+    <!-- ============ SERVICES ============ -->
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="display" id="services-title"><span class="mask"><span>What I</span></span> <span class="mask"><span class="outline">build</span></span></h2>
+          <p class="section-lede reveal">Pick a service to start a conversation about it.</p>
+        </div>
+
+        <ol class="service-list">
+          <li class="reveal"><a class="service" href="#contact" data-service="Landing page">
+            <span class="service-num" aria-hidden="true">01</span>
+            <span class="service-name">Landing pages</span>
+            <span class="service-desc">One focused page for an ad, a launch or an offer, built to get the click.</span>
+            <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </a></li>
+          <li class="reveal"><a class="service" href="#contact" data-service="Business website">
+            <span class="service-num" aria-hidden="true">02</span>
+            <span class="service-name">Business websites</span>
+            <span class="service-desc">A clear, professional site that explains what you do and makes it easy to get in touch.</span>
+            <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </a></li>
+          <li class="reveal"><a class="service" href="#contact" data-service="Online store">
+            <span class="service-num" aria-hidden="true">03</span>
+            <span class="service-name">Online stores</span>
+            <span class="service-desc">Shopify or WooCommerce stores with product pages and a checkout people finish.</span>
+            <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </a></li>
+          <li class="reveal"><a class="service" href="#contact" data-service="Website redesign">
+            <span class="service-num" aria-hidden="true">04</span>
+            <span class="service-name">Redesigns</span>
+            <span class="service-desc">Your current site rebuilt to look modern, load fast and work properly on phones.</span>
+            <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </a></li>
+          <li class="reveal"><a class="service" href="#contact" data-service="UI/UX design">
+            <span class="service-num" aria-hidden="true">05</span>
+            <span class="service-name">UI/UX design</span>
+            <span class="service-desc">Figma designs and clickable prototypes for websites and apps, ready for any developer.</span>
+            <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </a></li>
+          <li class="reveal"><a class="service" href="#contact" data-service="Website care">
+            <span class="service-num" aria-hidden="true">06</span>
+            <span class="service-name">Website care</span>
+            <span class="service-desc">Monthly updates, backups, speed checks and small changes, so your site keeps working.</span>
+            <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </a></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <!-- PLACEHOLDER: set your real prices, currency and timelines -->
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="display" id="pricing-title"><span class="mask"><span>Simple</span></span> <span class="mask"><span class="outline">pricing</span></span></h2>
+          <p class="section-lede reveal">Fixed prices, agreed before we start. Every project begins with a free 20-minute call.</p>
+        </div>
+
+        <div class="price-grid">
+          <article class="price-card reveal">
+            <h3>Landing page</h3>
+            <p class="price"><small>From</small> $350</p>
+            <p class="price-note">Ready in about 7 days</p>
+            <ul class="price-list">
+              <li>One page, designed for a single offer</li>
+              <li>Mobile-first and fast to load</li>
+              <li>Help writing the headline and copy</li>
+              <li>Form or booking connected</li>
+            </ul>
+            <a class="btn btn-ghost" href="#contact" data-service="Landing page">Start a landing page</a>
+          </article>
+
+          <article class="price-card price-card-featured reveal" style="--d:1">
+            <p class="price-badge">Most popular</p>
+            <h3>Business website</h3>
+            <p class="price"><small>From</small> $900</p>
+            <p class="price-note">Ready in 2 to 3 weeks</p>
+            <ul class="price-list">
+              <li>Up to 6 pages</li>
+              <li>Edit your own content, no code</li>
+              <li>Google-ready SEO setup</li>
+              <li>Analytics and contact forms</li>
+              <li>30 days of free changes</li>
+            </ul>
+            <a class="btn btn-orange" href="#contact" data-service="Business website">
+              <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              Start a website
+            </a>
+          </article>
+
+          <article class="price-card reveal" style="--d:2">
+            <h3>Online store</h3>
+            <p class="price"><small>From</small> $1,800</p>
+            <p class="price-note">Ready in 3 to 5 weeks</p>
+            <ul class="price-list">
+              <li>Shopify or WooCommerce</li>
+              <li>Up to 30 products added for you</li>
+              <li>Payments, shipping and emails set up</li>
+              <li>Training video for your team</li>
+            </ul>
+            <a class="btn btn-ghost" href="#contact" data-service="Online store">Start a store</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS + TOOLS ============ -->
+    <!-- PLACEHOLDER: replace with real client quotes, names and your actual tools -->
     <section class="section testimonials" id="testimonials" aria-labelledby="testimonials-title">
       <div class="container">
-        <h2 class="display" id="testimonials-title">What clients say</h2>
+        <div class="section-head">
+          <h2 class="display" id="testimonials-title"><span class="mask"><span>Trusted by</span></span> <span class="mask"><span class="outline">clients</span></span></h2>
+          <p class="section-lede reveal">What business owners say after their new site goes live.</p>
+        </div>
 
         <div class="quote-grid">
-          <figure class="quote quote-feature">
-            <blockquote>
-              <p>Within two months our ads were profitable for the first time. More importantly, we finally understand our numbers.</p>
-            </blockquote>
-            <figcaption><span class="quote-name">Amara Okafor</span> Founder, Glow Naturals</figcaption>
+          <figure class="quote reveal">
+            <p class="stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 120 20" aria-hidden="true"><use width="20" height="20" href="#star"/><use width="20" height="20" href="#star" x="24"/><use width="20" height="20" href="#star" x="48"/><use width="20" height="20" href="#star" x="72"/><use width="20" height="20" href="#star" x="96"/></svg></p>
+            <blockquote><p>Our old site looked fine but nobody bought. The new one paid for itself in the first month.</p></blockquote>
+            <figcaption><span class="avatar" aria-hidden="true">AO</span><span><b>Amara Okafor</b>Founder, Glow Naturals</span></figcaption>
           </figure>
-          <figure class="quote">
-            <blockquote>
-              <p>Clear, fast and honest. Every week we knew what was working and what was being cut.</p>
-            </blockquote>
-            <figcaption><span class="quote-name">Jessica Miller</span> Marketing Manager, Keystone Homes</figcaption>
+          <figure class="quote reveal" style="--d:1">
+            <p class="stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 120 20" aria-hidden="true"><use width="20" height="20" href="#star"/><use width="20" height="20" href="#star" x="24"/><use width="20" height="20" href="#star" x="48"/><use width="20" height="20" href="#star" x="72"/><use width="20" height="20" href="#star" x="96"/></svg></p>
+            <blockquote><p>Fast, clear and easy to work with. He understood our customers better than our last agency did.</p></blockquote>
+            <figcaption><span class="avatar" aria-hidden="true">JM</span><span><b>Jessica Miller</b>Marketing Manager, Keystone Homes</span></figcaption>
           </figure>
-          <figure class="quote">
-            <blockquote>
-              <p>The email flows paid for the whole project in the first month.</p>
-            </blockquote>
-            <figcaption><span class="quote-name">Ryan Cooper</span> Co-founder, Hudson Threads</figcaption>
+          <figure class="quote reveal" style="--d:2">
+            <p class="stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 120 20" aria-hidden="true"><use width="20" height="20" href="#star"/><use width="20" height="20" href="#star" x="24"/><use width="20" height="20" href="#star" x="48"/><use width="20" height="20" href="#star" x="72"/><use width="20" height="20" href="#star" x="96"/></svg></p>
+            <blockquote><p>The landing page converted better than anything we had tried before. We now send every ad there.</p></blockquote>
+            <figcaption><span class="avatar" aria-hidden="true">DA</span><span><b>David Adeyemi</b>Director, Bright Path Academy</span></figcaption>
           </figure>
+        </div>
+
+        <div class="tools">
+          <h3 class="tools-title reveal">Tools I build with</h3>
+          <ul class="tool-list">
+            <li class="reveal">Figma</li>
+            <li class="reveal">Framer</li>
+            <li class="reveal">Webflow</li>
+            <li class="reveal">WordPress</li>
+            <li class="reveal">Elementor</li>
+            <li class="reveal">Shopify</li>
+            <li class="reveal">WooCommerce</li>
+            <li class="reveal">HTML &amp; CSS</li>
+            <li class="reveal">JavaScript</li>
+            <li class="reveal">Google Analytics</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- ============ CONTACT ============ -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-grid">
-        <div class="contact-intro">
-          <h2 class="display" id="contact-title">Let's grow your business</h2>
-          <p>Tell me a little about your business and goals. I reply within one working day.</p>
-          <ul class="contact-links">
-            <li><a href="mailto:eshemike26@gmail.com">eshemike26@gmail.com</a></li>
-            <li><a href="https://www.linkedin.com/in/ilabonosi-mcanthony-eshemokhai-baba12293/" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://www.instagram.com/the_drsales/" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://www.facebook.com/eshemokhai.osi/" target="_blank" rel="noopener">Facebook</a></li>
-            <li><a href="https://x.com/only_osi" target="_blank" rel="noopener">X (Twitter)</a></li>
-          </ul>
+      <div class="container">
+        <h2 class="contact-title" id="contact-title">
+          <span class="mask"><span>Let's</span></span>
+          <span class="mask"><span class="outline">talk</span></span>
+        </h2>
+
+        <div class="contact-grid">
+          <div class="contact-intro reveal">
+            <p>Tell me about your business and the site you need. I reply within one working day.</p>
+            <a class="contact-email" href="mailto:eshemike26@gmail.com">eshemike26@gmail.com</a>
+            <ul class="contact-links">
+              <li><a href="https://www.linkedin.com/in/ilabonosi-mcanthony-eshemokhai-baba12293/" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://www.instagram.com/the_drsales/" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="https://www.facebook.com/eshemokhai.osi/" target="_blank" rel="noopener">Facebook</a></li>
+              <li><a href="https://x.com/only_osi" target="_blank" rel="noopener">X (Twitter)</a></li>
+            </ul>
+          </div>
+
+          <!-- Messages are delivered to your email by Formspree (formspree.io) -->
+          <form class="contact-form reveal" action="https://formspree.io/f/xjygjzlp" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New web design enquiry from your portfolio">
+            <!-- Spam trap: real visitors never see or fill this -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+
+            <div class="field">
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" required>
+              <p class="field-error" id="cf-name-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" required>
+              <p class="field-error" id="cf-email-error" hidden></p>
+            </div>
+            <div class="field field-full">
+              <label for="cf-service">What do you need?</label>
+              <select id="cf-service" name="service">
+                <option>Landing page</option>
+                <option>Business website</option>
+                <option>Online store</option>
+                <option>Website redesign</option>
+                <option>UI/UX design</option>
+                <option>Website care</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field field-full">
+              <label for="cf-message">Tell me about the project</label>
+              <textarea id="cf-message" name="message" rows="5" required></textarea>
+              <p class="field-error" id="cf-message-error" hidden></p>
+            </div>
+            <div class="field-full">
+              <button class="btn btn-orange" type="submit">
+                <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                <span data-btn-label>Send message</span>
+              </button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
         </div>
-
-        <!-- Messages are delivered to your email by Formspree (formspree.io) -->
-        <form class="contact-form" action="https://formspree.io/f/xjygjzlp" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="New message from your portfolio website">
-          <!-- Spam trap: real visitors never see or fill this -->
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-
-          <div class="field">
-            <label for="cf-name">Your name</label>
-            <input id="cf-name" name="name" type="text" autocomplete="name" required>
-            <p class="field-error" id="cf-name-error" hidden></p>
-          </div>
-          <div class="field">
-            <label for="cf-email">Email</label>
-            <input id="cf-email" name="email" type="email" autocomplete="email" required>
-            <p class="field-error" id="cf-email-error" hidden></p>
-          </div>
-          <div class="field">
-            <label for="cf-service">What do you need help with?</label>
-            <select id="cf-service" name="service">
-              <option>Growth strategy</option>
-              <option>Paid ads</option>
-              <option>Funnels and conversion</option>
-              <option>Email and retention</option>
-              <option>Lead magnets</option>
-              <option>CRM and relationship management</option>
-              <option>Social media content</option>
-              <option>Analytics and reporting</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="cf-message">Message</label>
-            <textarea id="cf-message" name="message" rows="5" required></textarea>
-            <p class="field-error" id="cf-message-error" hidden></p>
-          </div>
-          <button class="btn btn-orange" type="submit">Send message</button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
       </div>
     </section>
   </main>
@@ -655,10 +455,15 @@
         <img src="assets/img/logo.svg" alt="" width="28" height="28">
         <span class="brand-name"><span class="brand-d">D</span>r Sales</span>
       </a>
-      <p>© <span data-year>2026</span> Dr Sales</p>
+      <p>© <span data-year>2026</span> McAnthony · Web design &amp; development</p>
+      <a class="to-top" href="#top">Back to top</a>
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=10" defer></script>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="star" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></symbol>
+  </svg>
+
+  <script src="assets/js/main.js?v=29" defer></script>
 </body>
 </html>

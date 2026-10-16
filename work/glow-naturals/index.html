@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glow Naturals — Plant-powered skincare</title>
+  <meta name="description" content="Clean, plant-powered skincare made in small batches. Serums, oils and creams for skin that glows, naturally.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f7f0e6;
+      --sand: #efe3d3;
+      --clay: #b4693b;
+      --clay-dark: #8f4f29;
+      --leaf: #2f3b2a;
+      --ink: #2a211b;
+      --muted: #6d5f55;
+      --white: #fffdf9;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font: 400 16px/1.6 'DM Sans', system-ui, sans-serif; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    .serif { font-family: 'Fraunces', Georgia, serif; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+
+    .announce { background: var(--leaf); color: #e9e2d2; text-align: center; font-size: 13px; padding: 9px; letter-spacing: .02em; }
+    .announce b { color: #f3c79c; font-weight: 500; }
+
+    header { position: sticky; top: 0; z-index: 10; background: rgba(247, 240, 230, .92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(42, 33, 27, .08); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 10px; font: 500 24px/1 'Fraunces', serif; letter-spacing: -.02em; }
+    .logo svg { width: 34px; height: 34px; }
+    .nav ul { display: flex; gap: 34px; font-size: 15px; }
+    .nav ul a:hover { color: var(--clay); }
+    .icons { display: flex; align-items: center; gap: 20px; }
+    .icons svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+    .cart { position: relative; }
+    .cart span { position: absolute; top: -7px; right: -9px; width: 17px; height: 17px; border-radius: 50%; background: var(--clay); color: #fff; font-size: 10px; display: grid; place-items: center; }
+
+    .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; padding: 72px 0 96px; }
+    .pill { display: inline-flex; gap: 8px; align-items: center; padding: 6px 14px; border-radius: 99px; background: var(--sand); font-size: 13px; font-weight: 500; color: var(--clay-dark); }
+    .hero h1 { margin-top: 26px; font: 400 clamp(52px, 6.4vw, 92px)/.98 'Fraunces', serif; letter-spacing: -.035em; }
+    .hero h1 em { color: var(--clay); }
+    .hero p.lead { margin-top: 24px; max-width: 440px; font-size: 18px; color: var(--muted); }
+    .actions { display: flex; align-items: center; gap: 24px; margin-top: 36px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 17px 30px; border-radius: 99px; background: var(--leaf); color: var(--cream); font-weight: 500; }
+    .btn:hover { background: #1f281b; }
+    .link { font-weight: 500; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+    .proof { display: flex; align-items: center; gap: 14px; margin-top: 44px; font-size: 14px; color: var(--muted); }
+    .faces { display: flex; }
+    .faces i { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--cream); margin-left: -8px; background: center/cover; }
+    .faces i:first-child { margin-left: 0; }
+    .stars { color: var(--clay); letter-spacing: 2px; }
+    .hero-img { position: relative; }
+    .hero-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 260px 260px 24px 24px; }
+    .float { position: absolute; left: -44px; bottom: 56px; display: flex; gap: 14px; align-items: center; padding: 14px 18px 14px 14px; border-radius: 18px; background: var(--white); box-shadow: 0 20px 50px rgba(80, 50, 30, .14); }
+    .float img { width: 54px; height: 54px; border-radius: 12px; object-fit: cover; }
+    .float b { display: block; font-weight: 500; }
+    .float small { color: var(--muted); }
+
+    .values { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid rgba(42, 33, 27, .1); }
+    .values div { padding: 26px 24px; display: flex; gap: 14px; align-items: center; font-size: 15px; }
+    .values div + div { border-left: 1px solid rgba(42, 33, 27, .1); }
+    .values svg { width: 26px; height: 26px; flex: none; fill: none; stroke: var(--clay); stroke-width: 1.6; }
+
+    section { padding: 110px 0; }
+    .head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 48px; }
+    .head h2 { font: 400 54px/1 'Fraunces', serif; letter-spacing: -.03em; }
+    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .product .ph { position: relative; border-radius: 20px; overflow: hidden; background: var(--sand); }
+    .product .ph img { width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform .6s; }
+    .product:hover .ph img { transform: scale(1.05); }
+    .tag { position: absolute; top: 14px; left: 14px; padding: 5px 11px; border-radius: 99px; background: var(--white); font-size: 12px; font-weight: 500; }
+    .product h3 { margin-top: 18px; font: 500 20px/1.2 'Fraunces', serif; }
+    .product .meta { display: flex; justify-content: space-between; margin-top: 6px; color: var(--muted); font-size: 14px; }
+    .product .meta b { color: var(--ink); font-weight: 500; font-size: 16px; }
+    .add { margin-top: 14px; width: 100%; padding: 13px; border: 1px solid var(--ink); border-radius: 99px; background: none; font: 500 14px 'DM Sans', sans-serif; cursor: pointer; }
+
+    .ingredients { background: var(--leaf); color: var(--cream); }
+    .ing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .ing-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 24px; }
+    .ingredients h2 { font: 400 58px/1.02 'Fraunces', serif; letter-spacing: -.03em; }
+    .ingredients h2 em { color: #f3c79c; }
+    .ing-list { margin-top: 40px; display: grid; gap: 26px; }
+    .ing-list li { display: grid; grid-template-columns: 48px 1fr; gap: 18px; padding-top: 24px; border-top: 1px solid rgba(247, 240, 230, .16); }
+    .ing-list span { font: 400 30px/1 'Fraunces', serif; color: #f3c79c; }
+    .ing-list b { display: block; font-weight: 500; font-size: 18px; }
+    .ing-list p { color: #c9c3b4; margin-top: 4px; }
+
+    .review { text-align: center; max-width: 860px; margin: 0 auto; }
+    .review blockquote { margin: 22px 0 0; font: 400 40px/1.25 'Fraunces', serif; letter-spacing: -.02em; }
+    .review cite { display: block; margin-top: 28px; font-style: normal; color: var(--muted); }
+
+    .news { background: var(--sand); border-radius: 32px; padding: 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .news h2 { font: 400 46px/1.05 'Fraunces', serif; letter-spacing: -.03em; }
+    .news form { display: flex; gap: 10px; padding: 8px; border-radius: 99px; background: var(--white); }
+    .news input { flex: 1; border: 0; background: none; padding: 0 18px; font: 16px 'DM Sans', sans-serif; outline: none; }
+
+    footer { padding: 80px 0 40px; }
+    .foot { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; }
+    .foot p { color: var(--muted); margin-top: 16px; max-width: 280px; }
+    .foot h4 { margin: 0 0 16px; font-weight: 500; }
+    .foot li { color: var(--muted); margin-bottom: 10px; }
+    .legal { display: flex; justify-content: space-between; margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(42, 33, 27, .1); font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 0 20px; }
+      .nav ul { display: none; }
+      .hero, .ing-grid, .news { grid-template-columns: 1fr; }
+      .float { left: 12px; }
+      .values, .products { grid-template-columns: 1fr 1fr; }
+      .foot { grid-template-columns: 1fr 1fr; }
+      .news { padding: 40px 24px; }
+      .head h2, .ingredients h2 { font-size: 40px; }
+      .review blockquote { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announce">Free delivery on orders over $50 · <b>New: Vitamin C Glow Serum</b></div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#b4693b"/><path d="M20 30c0-8 4-13 10-15-1 7-5 12-10 15zM20 30c0-6-3-10-8-12 0 6 3 10 8 12z" fill="#f7f0e6"/><circle cx="20" cy="12" r="3" fill="#f3c79c"/></svg>
+        glow naturals
+      </a>
+      <ul>
+        <li><a href="#">Shop all</a></li>
+        <li><a href="#">Bestsellers</a></li>
+        <li><a href="#">Ingredients</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Our story</a></li>
+      </ul>
+      <div class="icons">
+        <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <svg viewBox="0 0 24 24" aria-label="Account"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>
+        <a class="cart" href="#" aria-label="Cart, 2 items"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 016 0v2"/></svg><span>2</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <span class="pill">● New · Vitamin C Glow Serum</span>
+        <h1>Skin that glows, <em>naturally.</em></h1>
+        <p class="lead">Plant-powered serums, oils and creams, made in small batches with ingredients you can pronounce.</p>
+        <div class="actions">
+          <a class="btn" href="#">Shop the serum →</a>
+          <a class="link" href="#">Take the skin quiz</a>
+        </div>
+        <div class="proof">
+          <div class="faces">
+            <i style="background-image:url(https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&q=60)"></i>
+            <i style="background-image:url(https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&q=60)"></i>
+            <i style="background-image:url(https://images.unsplash.com/photo-1531482615713-2afd69097998?w=80&h=80&fit=crop&q=60)"></i>
+          </div>
+          <div><span class="stars">★★★★★</span><br>4.9 from 2,100+ reviews</div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=1000&q=75&auto=format&fit=crop" alt="Glow serum bottle with a dropper beside eucalyptus leaves">
+        <div class="float">
+          <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=120&h=120&q=60&auto=format&fit=crop" alt="">
+          <div><b>Overnight Repair Cream</b><small>Back in stock · $34</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap values">
+      <div><svg viewBox="0 0 24 24"><path d="M12 21c0-7 3-12 9-14-1 8-4 12-9 14zM12 21C12 15 9 11 3 9c0 7 4 11 9 12z"/></svg>98% natural ingredients</div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z"/></svg>Dermatologist tested</div>
+      <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>Never tested on animals</div>
+      <div><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>Free delivery over $50</div>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="head"><h2>Bestsellers</h2><a class="link" href="#">Shop all products</a></div>
+        <div class="products">
+          <article class="product">
+            <div class="ph"><span class="tag">Bestseller</span><img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=600&q=70&auto=format&fit=crop" alt="Vitamin C Glow Serum"></div>
+            <h3>Vitamin C Glow Serum</h3>
+            <div class="meta"><span>30 ml · ★ 4.9</span><b>$38</b></div>
+            <button class="add" type="button">Add to bag</button>
+          </article>
+          <article class="product">
+            <div class="ph"><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=70&auto=format&fit=crop" alt="Botanical Face Oil"></div>
+            <h3>Botanical Face Oil</h3>
+            <div class="meta"><span>50 ml · ★ 4.8</span><b>$32</b></div>
+            <button class="add" type="button">Add to bag</button>
+          </article>
+          <article class="product">
+            <div class="ph"><span class="tag">New</span><img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&q=70&auto=format&fit=crop" alt="Overnight Repair Cream"></div>
+            <h3>Overnight Repair Cream</h3>
+            <div class="meta"><span>60 ml · ★ 4.9</span><b>$34</b></div>
+            <button class="add" type="button">Add to bag</button>
+          </article>
+          <article class="product">
+            <div class="ph"><img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&q=70&auto=format&fit=crop" alt="The Glow Ritual set"></div>
+            <h3>The Glow Ritual Set</h3>
+            <div class="meta"><span>3 products · ★ 5.0</span><b>$89</b></div>
+            <button class="add" type="button">Add to bag</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ingredients">
+      <div class="wrap ing-grid">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&q=70&auto=format&fit=crop" alt="A woman relaxing during a facial treatment">
+        <div>
+          <h2>What goes in, <em>and why.</em></h2>
+          <ul class="ing-list">
+            <li><span>01</span><div><b>Kakadu plum</b><p>Nature's richest source of vitamin C, to brighten dull skin and even out dark spots.</p></div></li>
+            <li><span>02</span><div><b>Cold-pressed marula oil</b><p>Light, fast-absorbing moisture that locks in hydration without clogging pores.</p></div></li>
+            <li><span>03</span><div><b>Shea butter</b><p>Sourced from women's cooperatives in Ghana, to soothe and repair overnight.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap review">
+        <span class="stars">★★★★★</span>
+        <blockquote>“Three weeks in and people keep asking what I've changed. My dark spots have faded and my skin finally feels calm.”</blockquote>
+        <cite>Adaeze N. · Verified buyer</cite>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="news">
+        <h2>Get 10% off your first order</h2>
+        <form onsubmit="return false"><input type="email" placeholder="Your email address" aria-label="Email address"><button class="btn" type="submit">Subscribe</button></form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <a class="logo" href="#"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#b4693b"/><path d="M20 30c0-8 4-13 10-15-1 7-5 12-10 15zM20 30c0-6-3-10-8-12 0 6 3 10 8 12z" fill="#f7f0e6"/><circle cx="20" cy="12" r="3" fill="#f3c79c"/></svg>glow naturals</a>
+          <p>Plant-powered skincare, made in small batches.</p>
+        </div>
+        <div><h4>Shop</h4><ul><li>Serums</li><li>Face oils</li><li>Moisturisers</li><li>Gift sets</li></ul></div>
+        <div><h4>Help</h4><ul><li>Delivery</li><li>Returns</li><li>Track order</li><li>Contact</li></ul></div>
+        <div><h4>Follow</h4><ul><li>Instagram</li><li>TikTok</li><li>Pinterest</li></ul></div>
+      </div>
+      <div class="legal"><span>© 2026 Glow Naturals</span><span>Website by McAnthony</span></div>
+    </div>
+  </footer>
+</body>
+</html>

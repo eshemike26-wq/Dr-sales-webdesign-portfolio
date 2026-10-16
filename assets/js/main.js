@@ -1,3 +1,141 @@
+const root = document.documentElement;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+// Split [data-split] text into characters for the staggered reveal.
+// Screen readers get the original text once; the animated letters are hidden from them.
+document.querySelectorAll('[data-split]').forEach((el) => {
+  const text = el.textContent.trim();
+  el.textContent = '';
+  const sr = document.createElement('span');
+  sr.className = 'sr-only';
+  sr.textContent = text;
+  const visual = document.createElement('span');
+  visual.setAttribute('aria-hidden', 'true');
+  [...text].forEach((ch, i) => {
+    const wrap = document.createElement('span');
+    wrap.className = 'char-wrap';
+    const c = document.createElement('span');
+    c.className = 'char';
+    c.style.setProperty('--i', i);
+    c.textContent = ch;
+    wrap.appendChild(c);
+    visual.appendChild(wrap);
+  });
+  el.append(sr, visual);
+});
+
+// Split the about statement into words that light up as you scroll
+const fillEl = document.querySelector('[data-fill]');
+let fillWords = [];
+if (fillEl) {
+  const words = fillEl.textContent.trim().split(/\s+/);
+  fillEl.textContent = '';
+  words.forEach((w, i) => {
+    const s = document.createElement('span');
+    s.className = 'word';
+    s.textContent = w;
+    fillEl.append(s, i < words.length - 1 ? ' ' : '');
+  });
+  fillWords = [...fillEl.querySelectorAll('.word')];
+}
+
+// Intro loader: count 0 → 100, slide the panel away, then play the hero
+function startPage() {
+  document.body.classList.add('is-ready');
+}
+
+const preloader = document.querySelector('.preloader');
+if (root.classList.contains('is-loading') && preloader) {
+  const out = preloader.querySelector('[data-count-out]');
+  const bar = preloader.querySelector('.preloader-bar');
+  const duration = 1400;
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    out.textContent = Math.round(eased * 100);
+    bar.style.setProperty('--p', eased);
+    if (t < 1) {
+      requestAnimationFrame(tick);
+      return;
+    }
+    preloader.classList.add('is-leaving');
+    setTimeout(startPage, 350);
+    preloader.addEventListener('transitionend', () => {
+      root.classList.remove('is-loading');
+      preloader.remove();
+    }, { once: true });
+  };
+  requestAnimationFrame(tick);
+  try { sessionStorage.setItem('introSeen', '1'); } catch (e) { /* storage blocked */ }
+} else {
+  requestAnimationFrame(startPage);
+}
+
+// Scroll reveals
+const revealTargets = document.querySelectorAll('.reveal, .reveal-img, .display, .contact-title');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -12% 0px' });
+  revealTargets.forEach((el) => io.observe(el));
+} else {
+  revealTargets.forEach((el) => el.classList.add('is-in'));
+}
+
+// Word fill: words brighten one by one as the statement crosses the viewport
+function updateFill() {
+  if (!fillWords.length) return;
+  if (reduceMotion.matches) {
+    fillWords.forEach((w) => w.style.setProperty('--o', 1));
+    return;
+  }
+  const rect = fillEl.getBoundingClientRect();
+  const vh = window.innerHeight;
+  // 0 when the top reaches 85% of the viewport, 1 when the bottom reaches 45%
+  const progress = Math.min(1, Math.max(0, (vh * 0.85 - rect.top) / (rect.height + vh * 0.4)));
+  const lit = progress * fillWords.length;
+  fillWords.forEach((w, i) => {
+    const o = 0.18 + 0.82 * Math.min(1, Math.max(0, lit - i));
+    w.style.setProperty('--o', o.toFixed(3));
+  });
+}
+
+// Highlight the nav link for the section on screen
+const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
+const navSections = navLinks.map((a) => document.querySelector(a.getAttribute('href')));
+function updateNav() {
+  const line = window.innerHeight * 0.4;
+  let current = -1;
+  navSections.forEach((s, i) => {
+    if (s && s.getBoundingClientRect().top <= line) current = i;
+  });
+  navLinks.forEach((a, i) => {
+    a.classList.toggle('is-current', i === current);
+    if (i === current) a.setAttribute('aria-current', 'true');
+    else a.removeAttribute('aria-current');
+  });
+}
+
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    updateFill();
+    updateNav();
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
+onScroll();
+
 // Mobile navigation
 const navToggle = document.querySelector('.nav-toggle');
 const nav = document.getElementById('site-nav');
@@ -5,6 +143,7 @@ const nav = document.getElementById('site-nav');
 function setNav(open) {
   navToggle.setAttribute('aria-expanded', String(open));
   nav.classList.toggle('is-open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 }
 
 navToggle.addEventListener('click', () => {
@@ -22,179 +161,105 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Experience slider: native swipe/scroll, plus arrow buttons and a counter
-const xpTrack = document.querySelector('.xp-track');
-if (xpTrack) {
-  const slides = [...xpTrack.querySelectorAll('.xp-slide')];
-  const prevBtn = document.querySelector('[data-xp-prev]');
-  const nextBtn = document.querySelector('[data-xp-next]');
-  const currentEl = document.querySelector('[data-xp-current]');
-  const progress = document.querySelector('.xp-progress');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pad = (n) => String(n).padStart(2, '0');
-  let index = 0;
+window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => {
+  if (e.matches) setNav(false);
+});
 
-  document.querySelector('[data-xp-total]').textContent = pad(slides.length);
-
-  function render() {
-    currentEl.textContent = pad(index + 1);
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === slides.length - 1;
-    progress.style.setProperty('--xp-index', index);
-  }
-
-  // While an arrow-triggered scroll is animating, ignore scroll events so the
-  // counter doesn't flick through the slides in between
-  let targetIndex = null;
-
-  function goTo(i) {
-    index = Math.max(0, Math.min(slides.length - 1, i));
-    targetIndex = index;
-    render();
-    const left = slides[index].offsetLeft - slides[0].offsetLeft;
-    xpTrack.scrollTo({ left, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-  }
-
-  // Track which slide is snapped in place as the visitor swipes or scrolls
-  xpTrack.addEventListener('scroll', () => {
-    const step = slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : 1;
-    const atEnd = xpTrack.scrollLeft + xpTrack.clientWidth >= xpTrack.scrollWidth - 4;
-    const visible = atEnd ? slides.length - 1 : Math.round(xpTrack.scrollLeft / step);
-    if (targetIndex !== null) {
-      if (visible !== targetIndex) return;
-      targetIndex = null;
+// Cursor follower (mouse only): trails the pointer and grows over links
+const cursor = document.querySelector('.cursor');
+if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion.matches) {
+  let x = -100, y = -100, cx = -100, cy = -100;
+  let running = false;
+  const follow = () => {
+    cx += (x - cx) * 0.2;
+    cy += (y - cy) * 0.2;
+    cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+    if (Math.abs(x - cx) > 0.1 || Math.abs(y - cy) > 0.1) requestAnimationFrame(follow);
+    else running = false;
+  };
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    x = e.clientX;
+    y = e.clientY;
+    cursor.classList.add('is-visible');
+    const labelled = e.target.closest('[data-cursor]');
+    cursor.classList.toggle('is-view', !!labelled);
+    cursor.dataset.label = labelled ? labelled.dataset.cursor : '';
+    cursor.classList.toggle('is-hover', !labelled && !!e.target.closest('a, button, select, input, textarea, label'));
+    if (!running) {
+      running = true;
+      requestAnimationFrame(follow);
     }
-    if (visible !== index) {
-      index = visible;
-      render();
-    }
-  }, { passive: true });
-
-  // A swipe or wheel takes over from any arrow-triggered scroll
-  ['pointerdown', 'wheel', 'touchstart'].forEach((type) => {
-    xpTrack.addEventListener(type, () => { targetIndex = null; }, { passive: true });
   });
-
-  prevBtn.addEventListener('click', () => goTo(index - 1));
-  nextBtn.addEventListener('click', () => goTo(index + 1));
-
-  xpTrack.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index - 1); }
-  });
-
-  render();
+  document.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
 }
 
-// Recent projects: tabs that replay each dashboard's animation
-const projTabs = [...document.querySelectorAll('.proj-tab')];
-if (projTabs.length) {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let countRun = 0;
+// Hero photo: black and white until hovered. On touch screens it shows colour
+// while a finger is on it (including while scrolling) and fades back on release.
+const heroPhoto = document.querySelector('.hero-photo');
+if (heroPhoto) {
+  heroPhoto.addEventListener('touchstart', () => heroPhoto.classList.add('is-color'), { passive: true });
+  ['touchend', 'touchcancel'].forEach((type) => {
+    heroPhoto.addEventListener(type, () => heroPhoto.classList.remove('is-color'), { passive: true });
+  });
+}
 
-  function formatCount(el, value) {
-    const decimals = Number(el.dataset.decimals || 0);
-    const num = value.toLocaleString('en-US', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    });
-    return `${el.dataset.prefix || ''}${num}${el.dataset.suffix || ''}`;
+// Live site previews: scale each 1440px-wide homepage to fit its card,
+// and scroll through it while the card is hovered
+const sitePreviews = document.querySelectorAll('.site-view');
+if (sitePreviews.length) {
+  const fit = (view) => view.style.setProperty('--s', (view.clientWidth / 1440).toFixed(4));
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver((entries) => entries.forEach((entry) => fit(entry.target)));
+    sitePreviews.forEach((view) => ro.observe(view));
+  } else {
+    sitePreviews.forEach(fit);
   }
 
-  function countUp(panel) {
-    const run = ++countRun;
-    panel.querySelectorAll('[data-count]').forEach((el) => {
-      const target = Number(el.dataset.count);
+  sitePreviews.forEach((view) => {
+    const frame = view.querySelector('iframe');
+    const card = view.closest('.work-card');
+    let raf = null;
+
+    const scrollFrame = (direction) => {
+      cancelAnimationFrame(raf);
+      let doc;
+      try { doc = frame.contentWindow.document.scrollingElement; } catch (e) { return; }
+      if (!doc) return;
+      const max = doc.scrollHeight - doc.clientHeight;
       if (reduceMotion.matches) {
-        el.textContent = formatCount(el, target);
+        doc.scrollTop = direction > 0 ? max : 0;
         return;
       }
-      const duration = 1300;
-      const delay = 250;
-      const start = performance.now() + delay;
-      el.textContent = formatCount(el, 0);
-      const tick = (now) => {
-        if (run !== countRun) return; // a newer tab took over
-        const t = Math.min(1, Math.max(0, (now - start) / duration));
-        const eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = formatCount(el, target * eased);
-        if (t < 1) requestAnimationFrame(tick);
+      // Down slowly (about 900px of page per second), back up quickly
+      const speed = direction > 0 ? 0.9 : 4;
+      let last = performance.now();
+      const step = (now) => {
+        const dt = now - last;
+        last = now;
+        doc.scrollTop = Math.max(0, Math.min(max, doc.scrollTop + direction * speed * dt));
+        if ((direction > 0 && doc.scrollTop < max) || (direction < 0 && doc.scrollTop > 0)) {
+          raf = requestAnimationFrame(step);
+        }
       };
-      requestAnimationFrame(tick);
-    });
-  }
+      raf = requestAnimationFrame(step);
+    };
 
-  function play(panel) {
-    panel.classList.remove('is-animating');
-    void panel.offsetWidth; // restart CSS animations
-    panel.classList.add('is-animating');
-    countUp(panel);
-  }
-
-  function selectTab(tab, { focus = false } = {}) {
-    projTabs.forEach((t) => {
-      const selected = t === tab;
-      const panel = document.getElementById(t.getAttribute('aria-controls'));
-      t.setAttribute('aria-selected', String(selected));
-      t.tabIndex = selected ? 0 : -1;
-      panel.hidden = !selected;
-      panel.classList.toggle('is-active', selected);
-      if (!selected) panel.classList.remove('is-animating');
-    });
-    if (focus) tab.focus();
-    play(document.getElementById(tab.getAttribute('aria-controls')));
-  }
-
-  projTabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => selectTab(tab));
-    tab.addEventListener('keydown', (e) => {
-      let next = null;
-      if (e.key === 'ArrowRight') next = projTabs[(i + 1) % projTabs.length];
-      if (e.key === 'ArrowLeft') next = projTabs[(i - 1 + projTabs.length) % projTabs.length];
-      if (e.key === 'Home') next = projTabs[0];
-      if (e.key === 'End') next = projTabs[projTabs.length - 1];
-      if (next) {
-        e.preventDefault();
-        selectTab(next, { focus: true });
-      }
-    });
+    card.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') scrollFrame(1); });
+    card.addEventListener('pointerleave', () => scrollFrame(-1));
+    card.addEventListener('focusin', () => scrollFrame(1));
+    card.addEventListener('focusout', () => scrollFrame(-1));
   });
-
-  // Links like #panel-crm open that project directly
-  const linked = projTabs.find((t) => `#${t.getAttribute('aria-controls')}` === location.hash);
-  if (linked) {
-    selectTab(linked);
-    document.getElementById('work').scrollIntoView();
-  }
-
-  // Play the first dashboard when the section scrolls into view
-  const firstPanel = document.querySelector('.proj-panel.is-active');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        play(document.querySelector('.proj-panel.is-active'));
-        io.disconnect();
-      }
-    });
-    io.observe(firstPanel);
-  }
 }
 
-// Floating "Get in touch" button: show once the hero is passed,
-// hide again while the contact section is on screen
-const floatCta = document.querySelector('[data-float-cta]');
-if (floatCta) {
-  const hero = document.querySelector('.hero');
-  const contact = document.getElementById('contact');
-  const update = () => {
-    const pastHero = hero.getBoundingClientRect().bottom < window.innerHeight * 0.4;
-    const atContact = contact.getBoundingClientRect().top < window.innerHeight * 0.85;
-    floatCta.classList.toggle('is-visible', pastHero && !atContact);
-  };
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
-}
+// Service and pricing links pre-select the matching option in the contact form
+const serviceSelect = document.getElementById('cf-service');
+document.querySelectorAll('[data-service]').forEach((link) => {
+  link.addEventListener('click', () => {
+    const match = [...serviceSelect.options].find((o) => o.value === link.dataset.service);
+    if (match) serviceSelect.value = match.value;
+  });
+});
 
 // Footer year
 document.querySelectorAll('[data-year]').forEach((el) => {
@@ -205,6 +270,7 @@ document.querySelectorAll('[data-year]').forEach((el) => {
 const form = document.querySelector('.contact-form');
 const statusEl = form.querySelector('.form-status');
 const submitBtn = form.querySelector('button[type="submit"]');
+const submitLabel = submitBtn.querySelector('[data-btn-label]');
 
 const messages = {
   name: 'Enter your name.',
@@ -246,7 +312,7 @@ form.addEventListener('submit', async (e) => {
   }
 
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending…';
+  submitLabel.textContent = 'Sending…';
 
   try {
     const res = await fetch(form.action, {
@@ -263,6 +329,6 @@ form.addEventListener('submit', async (e) => {
     statusEl.textContent = 'Your message could not be sent. Check your connection and try again, or email me directly.';
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Send message';
+    submitLabel.textContent = 'Send message';
   }
 });

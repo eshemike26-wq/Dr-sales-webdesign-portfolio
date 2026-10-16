@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keystone Homes — Find a home you'll love living in</title>
+  <meta name="description" content="Keystone Homes helps families buy, sell and rent quality homes, with honest advice from local agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0f1e2b;
+      --navy-2: #172a3a;
+      --gold: #c8a46a;
+      --gold-soft: #f3ead9;
+      --ink: #14212c;
+      --muted: #5f6d78;
+      --line: #e4e8eb;
+      --bg: #f7f8f9;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: var(--ink); font: 400 16px/1.6 'Sora', system-ui, sans-serif; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+
+    .hero { position: relative; min-height: 760px; color: #fff; background: var(--navy) center/cover; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 30, 43, .55), rgba(15, 30, 43, .25) 40%, rgba(15, 30, 43, .85)); }
+    .hero > * { position: relative; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 92px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 21px; letter-spacing: -.02em; }
+    .logo svg { width: 36px; height: 36px; }
+    .nav ul { display: flex; gap: 36px; font-size: 15px; color: rgba(255, 255, 255, .85); }
+    .nav ul a:hover { color: #fff; }
+    .nav-cta { display: flex; align-items: center; gap: 20px; font-size: 15px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 10px; background: var(--gold); color: var(--navy); font-weight: 600; font-size: 15px; }
+    .btn-line { background: transparent; border: 1px solid rgba(255, 255, 255, .4); color: #fff; }
+
+    .hero-body { padding-top: 140px; max-width: 760px; }
+    .eyebrow { display: inline-flex; gap: 10px; align-items: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+    .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+    .hero h1 { margin-top: 22px; font-size: clamp(48px, 6vw, 80px); line-height: 1.02; font-weight: 600; letter-spacing: -.04em; }
+    .hero p { margin-top: 22px; font-size: 18px; color: rgba(255, 255, 255, .8); max-width: 520px; font-weight: 300; }
+
+    .search { position: relative; margin-top: -64px; z-index: 2; }
+    .search-box { background: #fff; border-radius: 18px; box-shadow: 0 30px 70px rgba(15, 30, 43, .18); padding: 10px; }
+    .tabs { display: flex; gap: 6px; padding: 8px 8px 14px; font-size: 14px; font-weight: 500; }
+    .tabs span { padding: 8px 18px; border-radius: 8px; color: var(--muted); }
+    .tabs span.on { background: var(--navy); color: #fff; }
+    .fields { display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap: 10px; }
+    .field { padding: 14px 18px; border-radius: 12px; background: var(--bg); }
+    .field small { display: block; font-size: 12px; color: var(--muted); }
+    .field b { font-weight: 500; }
+    .search .btn { padding-inline: 34px; border-radius: 12px; background: var(--navy); color: #fff; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 80px 0 40px; }
+    .stats div + div { border-left: 1px solid var(--line); padding-left: 40px; }
+    .stats b { display: block; font-size: 46px; font-weight: 600; letter-spacing: -.04em; }
+    .stats span { color: var(--muted); font-size: 15px; }
+
+    section { padding: 90px 0; }
+    .head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 44px; }
+    .head h2 { font-size: 46px; font-weight: 600; letter-spacing: -.04em; line-height: 1.05; }
+    .head p { color: var(--muted); margin-top: 12px; }
+    .more { font-weight: 500; border-bottom: 1px solid currentColor; }
+    .listings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .listing { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #fff; transition: box-shadow .3s, transform .3s; }
+    .listing:hover { box-shadow: 0 24px 50px rgba(15, 30, 43, .1); transform: translateY(-4px); }
+    .listing .ph { position: relative; }
+    .listing .ph img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .badge { position: absolute; top: 16px; left: 16px; padding: 6px 12px; border-radius: 8px; background: #fff; font-size: 12px; font-weight: 600; }
+    .badge.gold { background: var(--gold); color: var(--navy); }
+    .fav { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255, 255, 255, .9); display: grid; place-items: center; }
+    .fav svg { width: 18px; height: 18px; fill: none; stroke: var(--navy); stroke-width: 1.8; }
+    .listing .body { padding: 22px 22px 24px; }
+    .price { font-size: 26px; font-weight: 600; letter-spacing: -.03em; }
+    .listing h3 { margin-top: 4px; font-size: 17px; font-weight: 500; }
+    .addr { color: var(--muted); font-size: 14px; }
+    .specs { display: flex; gap: 22px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+    .specs b { color: var(--ink); font-weight: 600; }
+
+    .sell { background: var(--navy); color: #fff; border-radius: 28px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
+    .sell img { width: 100%; height: 100%; object-fit: cover; min-height: 520px; }
+    .sell-copy { padding: 72px 64px; }
+    .sell h2 { margin-top: 18px; font-size: 46px; font-weight: 600; letter-spacing: -.04em; line-height: 1.06; }
+    .sell p { margin-top: 18px; color: rgba(255, 255, 255, .72); font-weight: 300; }
+    .checks { margin: 30px 0 38px; display: grid; gap: 14px; }
+    .checks li { display: flex; gap: 12px; align-items: center; }
+    .checks li::before { content: '✓'; width: 26px; height: 26px; border-radius: 50%; background: rgba(200, 164, 106, .18); color: var(--gold); display: grid; place-items: center; font-size: 13px; flex: none; }
+
+    .testimonial { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+    .testimonial img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 22px; }
+    .testimonial blockquote { margin: 0; font-size: 32px; line-height: 1.35; font-weight: 400; letter-spacing: -.03em; }
+    .testimonial .who { margin-top: 30px; display: flex; align-items: center; gap: 14px; }
+    .testimonial .who b { display: block; font-weight: 600; }
+    .testimonial .who span { color: var(--muted); font-size: 14px; }
+    .gold-stars { color: var(--gold); font-size: 20px; letter-spacing: 3px; margin-bottom: 20px; }
+
+    .cta { text-align: center; background: var(--gold-soft); border-radius: 28px; padding: 90px 40px; }
+    .cta h2 { font-size: 52px; font-weight: 600; letter-spacing: -.04em; }
+    .cta p { margin: 16px auto 34px; color: var(--muted); max-width: 520px; }
+    .cta .btn { background: var(--navy); color: #fff; }
+
+    footer { background: var(--navy); color: rgba(255, 255, 255, .7); margin-top: 100px; padding: 80px 0 36px; }
+    .foot { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
+    .foot .logo { color: #fff; }
+    .foot p { margin-top: 16px; max-width: 300px; font-size: 15px; }
+    .foot h4 { margin: 0 0 16px; color: #fff; font-weight: 500; }
+    .foot li { margin-bottom: 10px; font-size: 15px; }
+    .legal { display: flex; justify-content: space-between; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13px; }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 0 20px; }
+      .nav ul, .nav-cta a:first-child { display: none; }
+      .fields, .listings, .sell, .testimonial { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .stats div + div { border: 0; padding: 0; }
+      .sell-copy { padding: 40px 24px; }
+      .foot { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" style="background-image:url(https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=75&auto=format&fit=crop)">
+    <div class="wrap nav">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#c8a46a"/><path d="M10 30V19a10 10 0 0120 0v11" fill="none" stroke="#0f1e2b" stroke-width="3"/><path d="M17 11h6l-1 6h-4z" fill="#0f1e2b"/></svg>
+        Keystone Homes
+      </a>
+      <ul>
+        <li><a href="#">Buy</a></li>
+        <li><a href="#">Rent</a></li>
+        <li><a href="#">Sell</a></li>
+        <li><a href="#">New developments</a></li>
+        <li><a href="#">About us</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#">+1 (555) 014-2290</a>
+        <a class="btn" href="#">Book a viewing</a>
+      </div>
+    </div>
+    <div class="wrap hero-body">
+      <span class="eyebrow">Trusted local agents since 2012</span>
+      <h1>Find a home you'll love living in.</h1>
+      <p>Hand-picked homes to buy and rent, with honest advice from agents who know every street.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap search">
+      <div class="search-box">
+        <div class="tabs"><span class="on">Buy</span><span>Rent</span><span>Sell</span></div>
+        <div class="fields">
+          <div class="field"><small>Location</small><b>Riverside, Lakeview…</b></div>
+          <div class="field"><small>Property type</small><b>Any type</b></div>
+          <div class="field"><small>Budget</small><b>$300k – $800k</b></div>
+          <a class="btn" href="#">Search homes</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap stats">
+      <div><b>1,200+</b><span>Homes sold</span></div>
+      <div><b>98%</b><span>Asking price achieved</span></div>
+      <div><b>14 days</b><span>Average time to offer</span></div>
+      <div><b>4.9★</b><span>From 640 reviews</span></div>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="head">
+          <div><h2>Featured homes</h2><p>New to the market this week.</p></div>
+          <a class="more" href="#">View all 86 listings</a>
+        </div>
+        <div class="listings">
+          <article class="listing">
+            <div class="ph"><span class="badge gold">New listing</span><span class="fav"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></svg></span><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=70&auto=format&fit=crop" alt="Modern family home with a lawn"></div>
+            <div class="body">
+              <p class="price">$685,000</p>
+              <h3>The Oakwood Residence</h3>
+              <p class="addr">24 Oakwood Drive, Riverside</p>
+              <div class="specs"><span><b>4</b> beds</span><span><b>3</b> baths</span><span><b>2,480</b> sq ft</span></div>
+            </div>
+          </article>
+          <article class="listing">
+            <div class="ph"><span class="badge">Open house Sat</span><span class="fav"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></svg></span><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=70&auto=format&fit=crop" alt="White house with a pool"></div>
+            <div class="body">
+              <p class="price">$742,500</p>
+              <h3>Palm Court Villa</h3>
+              <p class="addr">8 Palm Court, Lakeview</p>
+              <div class="specs"><span><b>5</b> beds</span><span><b>4</b> baths</span><span><b>3,100</b> sq ft</span></div>
+            </div>
+          </article>
+          <article class="listing">
+            <div class="ph"><span class="badge">Price reduced</span><span class="fav"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></svg></span><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=70&auto=format&fit=crop" alt="Contemporary timber home"></div>
+            <div class="body">
+              <p class="price">$529,000</p>
+              <h3>Cedar House</h3>
+              <p class="addr">117 Hillcrest Road, Northgate</p>
+              <div class="specs"><span><b>3</b> beds</span><span><b>2</b> baths</span><span><b>1,860</b> sq ft</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="sell">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=70&auto=format&fit=crop" alt="Bright open-plan living room">
+        <div class="sell-copy">
+          <span class="eyebrow">Selling with Keystone</span>
+          <h2>Get the best price, without the stress.</h2>
+          <p>Professional photos, a clear plan and weekly updates from one agent who handles everything.</p>
+          <ul class="checks">
+            <li>Free valuation within 48 hours</li>
+            <li>Professional photography and video tour</li>
+            <li>No sale, no fee</li>
+          </ul>
+          <a class="btn" href="#">Get a free valuation</a>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="wrap testimonial">
+        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=800&q=70&auto=format&fit=crop" alt="Modern kitchen in a sold home">
+        <div>
+          <p class="gold-stars">★★★★★</p>
+          <blockquote>“We had three offers in the first week and sold above asking. Keystone made a stressful move feel simple.”</blockquote>
+          <div class="who"><div><b>Michael &amp; Grace T.</b><span>Sold in Riverside, 2026</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap cta">
+      <h2>Ready to find your next home?</h2>
+      <p>Tell us what you're looking for and an agent will call you back today.</p>
+      <a class="btn" href="#">Talk to an agent</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <a class="logo" href="#"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#c8a46a"/><path d="M10 30V19a10 10 0 0120 0v11" fill="none" stroke="#0f1e2b" stroke-width="3"/><path d="M17 11h6l-1 6h-4z" fill="#0f1e2b"/></svg>Keystone Homes</a>
+          <p>Buying, selling and renting quality homes since 2012.</p>
+        </div>
+        <div><h4>Property</h4><ul><li>Buy</li><li>Rent</li><li>Sell</li><li>New developments</li></ul></div>
+        <div><h4>Company</h4><ul><li>About us</li><li>Our agents</li><li>Careers</li><li>Contact</li></ul></div>
+        <div><h4>Visit</h4><ul><li>42 Market Street</li><li>Riverside</li><li>Mon – Sat, 9am – 6pm</li></ul></div>
+      </div>
+      <div class="legal"><span>© 2026 Keystone Homes</span><span>Website by McAnthony</span></div>
+    </div>
+  </footer>
+</body>
+</html>
